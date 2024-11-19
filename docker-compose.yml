@@ -1,0 +1,66 @@
+version: '3.3'
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: mysql_ludaria
+    environment:
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+    ports:
+      - "3306:3306"
+    networks:
+      - ludaria-network
+    volumes:
+      - ./data/db:/var/lib/mysql
+    healthcheck:
+      test: mysqladmin ping -h localhost -u ${MYSQL_USER} --password=${MYSQL_PASSWORD}
+      interval: 5s
+      timeout: 30s
+      retries: 5
+      start_period: 2s
+
+  backend:
+    container_name: backend_ludaria
+    build:
+      context: ./build
+      target: springboot
+      args:
+        UID: ${UID}
+    restart: on-failure
+    env_file: ./.env
+    working_dir: /springboot
+    stdin_open: true
+    tty: true
+    volumes:
+      - ./backend/springboot:/springboot
+      - ./backend/springboot_m2:/root/.m2
+    networks:
+      - ludaria-network
+    ports:
+      - 4000:4000
+    depends_on:
+      mysql:
+        condition: service_healthy
+
+  frontend:
+    build:
+      context: ./build
+      target: react
+      args:
+        UID: ${UID}
+    container_name: frontend_ludaria
+    command: npm run dev
+    depends_on:
+      mysql:
+        condition: service_healthy
+    volumes:
+      - ./frontend/:/var/www
+    ports:
+      - "3000:3000"
+    networks:
+      - ludaria-network
+
+networks:
+  ludaria-network:
