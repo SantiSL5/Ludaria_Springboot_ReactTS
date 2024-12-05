@@ -2,6 +2,7 @@ package com.springboot.springboot.controllers;
 
 import com.springboot.springboot.model.Category;
 import com.springboot.springboot.requests.category.NewCategoryRequest;
+import com.springboot.springboot.requests.category.UpdateCategoryRequest;
 import com.springboot.springboot.requests.general.DeleteManyRequest;
 import com.springboot.springboot.services.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,7 +45,7 @@ public class CategoryController {
     }
 
     @PutMapping("/admin/category/{id}")
-    public ResponseEntity<?> updateCategory(@PathVariable String id, @RequestBody Category category) {
+    public ResponseEntity<?> updateCategory(@PathVariable String id, @RequestBody UpdateCategoryRequest category) {
         return categoryService.updateCategory(id, category);
     }
 

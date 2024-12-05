@@ -1,7 +1,7 @@
 package com.springboot.springboot.model;
 
 import jakarta.persistence.*;
-import java.util.List;
+import java.sql.Timestamp;
 
 @Entity
 @Table(name = "brands")
@@ -14,11 +14,26 @@ public class Brand {
     @Column(name = "name")
     private String name;
 
-    @OneToMany(mappedBy = "brand", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Product> products;
+    @Column(name = "img")
+    private String img;
+
+    @Column(name = "created_at")
+    private Timestamp created_at;
+
+    @Column(name = "updated_at")
+    private Timestamp updated_at;
+
+    public Brand() {
+    }
+
+    public Brand(long id, String name, String img) {
+        this.id = id;
+        this.name = name;
+        this.img = img;
+    }
 
     public long getId() {
-        return id;
+        return this.id;
     }
 
     public void setId(long id) {
@@ -26,18 +41,34 @@ public class Brand {
     }
 
     public String getName() {
-        return name;
+        return this.name;
     }
 
     public void setName(String name) {
         this.name = name;
     }
 
-    public List<Product> getProducts() {
-        return products;
+    public String getImg() {
+        return img;
     }
 
-    public void setProducts(List<Product> products) {
-        this.products = products;
+    public void setImg(String img) {
+        this.img = img;
+    }
+
+    public Timestamp getCreatedAt() {
+        return created_at;
+    }
+
+    public void setCreatedAt(Timestamp created_at) {
+        this.created_at = created_at;
+    }
+
+    public Timestamp getUpdatedAt() {
+        return updated_at;
+    }
+
+    public void setUpdatedAt(Timestamp updated_at) {
+        this.updated_at = updated_at;
     }
 }

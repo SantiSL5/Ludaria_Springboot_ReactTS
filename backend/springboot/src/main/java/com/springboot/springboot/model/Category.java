@@ -16,11 +16,12 @@ public class Category {
 
     @Column(name = "img")
     private String img;
+
     @Column(name = "created_at", nullable = false, updatable = false)
-    private Timestamp createdAt;
+    private Timestamp created_at;
 
     @Column(name = "updated_at", nullable = false)
-    private Timestamp updatedAt;
+    private Timestamp updated_at;
 
     public Category() {
     }
@@ -56,18 +57,18 @@ public class Category {
     }
 
     public Timestamp getCreatedAt() {
-        return createdAt;
+        return created_at;
     }
 
     public void setCreatedAt(Timestamp createdAt) {
-        this.createdAt = createdAt;
+        this.created_at = createdAt;
     }
 
     public Timestamp getUpdatedAt() {
-        return updatedAt;
+        return updated_at;
     }
 
     public void setUpdatedAt(Timestamp updatedAt) {
-        this.updatedAt = updatedAt;
+        this.updated_at = updatedAt;
     }
 }

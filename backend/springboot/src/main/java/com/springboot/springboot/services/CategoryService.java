@@ -1,6 +1,7 @@
 package com.springboot.springboot.services;
 
 import com.springboot.springboot.model.Category;
+import com.springboot.springboot.requests.category.UpdateCategoryRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import com.springboot.springboot.repository.CategoryRepository;
@@ -57,7 +58,7 @@ public class CategoryService {
         }
     }
 
-    public ResponseEntity<?> updateCategory(String id, Category updatedCategory) {
+    public ResponseEntity<?> updateCategory(String id, UpdateCategoryRequest updatedCategory) {
         try {
             Category category = getCategory(id);
             if (category == null) {
