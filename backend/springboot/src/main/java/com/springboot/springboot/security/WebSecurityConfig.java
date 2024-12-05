@@ -22,7 +22,6 @@ public class WebSecurityConfig {
             .csrf(csrf -> csrf.disable())
             .authorizeRequests()
             .requestMatchers("/api/**").permitAll();
-
     return http.build();
   }
 
