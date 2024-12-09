@@ -7,7 +7,7 @@ import jakarta.persistence.*;
 public class Accessory extends Product {
 
     @ManyToOne
-    @JoinColumn(name = "game_id", nullable = true)
+    @JoinColumn(name = "game", nullable = true)
     private Game game;
 
     public Game getGame() {

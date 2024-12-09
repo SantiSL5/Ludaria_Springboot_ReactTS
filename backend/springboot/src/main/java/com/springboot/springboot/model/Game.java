@@ -15,10 +15,10 @@ public class Game extends Product {
     private String difficulty;
 
     @Column(name = "launch_date")
-    private LocalDate launchDate;
+    private String launchDate;
 
     @Column(name = "duration")
-    private Duration duration;
+    private Integer duration;
 
     @Column(name = "min_players")
     private Integer minPlayers;
@@ -26,7 +26,6 @@ public class Game extends Product {
     @Column(name = "max_players")
     private Integer maxPlayers;
 
-    // Getters y setters
     public String getAuthor() {
         return author;
     }
@@ -43,19 +42,19 @@ public class Game extends Product {
         this.difficulty = difficulty;
     }
 
-    public LocalDate getLaunchDate() {
+    public String getLaunchDate() {
         return launchDate;
     }
 
-    public void setLaunchDate(LocalDate launchDate) {
+    public void setLaunchDate(String launchDate) {
         this.launchDate = launchDate;
     }
 
-    public Duration getDuration() {
+    public Integer getDuration() {
         return duration;
     }
 
-    public void setDuration(Duration duration) {
+    public void setDuration(Integer duration) {
         this.duration = duration;
     }
 

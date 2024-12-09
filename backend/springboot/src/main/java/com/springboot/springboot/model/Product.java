@@ -23,6 +23,9 @@ public class Product {
     @Column(name = "price", precision = 10, scale = 2)
     private BigDecimal price;
 
+    @Column(name = "img")
+    private String img;
+
     @Column(name = "age")
     private Integer age;
 
@@ -75,6 +78,14 @@ public class Product {
         this.price = price;
     }
 
+    public String getImg() {
+        return img;
+    }
+
+    public void setImg(String img) {
+        this.img = img;
+    }
+
     public Integer getAge() {
         return age;
     }
@@ -99,19 +110,19 @@ public class Product {
         this.brand = brand;
     }
 
-    public Timestamp getCreated_at() {
+    public Timestamp getCreatedAt() {
         return created_at;
     }
 
-    public void setCreated_at(Timestamp created_at) {
+    public void setCreatedAt(Timestamp created_at) {
         this.created_at = created_at;
     }
 
-    public Timestamp getUpdated_at() {
+    public Timestamp getUpdatedAt() {
         return updated_at;
     }
 
-    public void setUpdated_at(Timestamp updated_at) {
+    public void setUpdatedAt(Timestamp updated_at) {
         this.updated_at = updated_at;
     }
 }

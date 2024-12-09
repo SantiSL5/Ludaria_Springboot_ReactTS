@@ -17,6 +17,7 @@ import java.util.Optional;
 
 @Service
 public class CategoryService {
+
     private static final Logger logger = LoggerFactory.getLogger(Category.class);
 
     @Autowired
