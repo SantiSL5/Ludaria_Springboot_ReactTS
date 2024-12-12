@@ -14,6 +14,10 @@ public class Category {
     @Column(name = "name", nullable = false)
     private String name;
 
+    @Column(name = "type")
+    @Enumerated(EnumType.STRING)
+    private ProductType type;
+
     @Column(name = "img")
     private String img;
 
@@ -26,10 +30,11 @@ public class Category {
     public Category() {
     }
 
-    public Category(Long id, String name, String img) {
+    public Category(Long id, String name, String img, ProductType type) {
         this.id = id;
         this.name = name;
         this.img = img;
+        this.type = type;
     }
 
     public Long getId() {
@@ -54,6 +59,14 @@ public class Category {
 
     public void setImg(String img) {
         this.img = img;
+    }
+
+    public ProductType getType() {
+        return type;
+    }
+
+    public void setType(ProductType type) {
+        this.type = type;
     }
 
     public Timestamp getCreatedAt() {

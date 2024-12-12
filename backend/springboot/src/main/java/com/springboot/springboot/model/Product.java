@@ -37,6 +37,10 @@ public class Product {
     @JoinColumn(name = "brand_id", nullable = false)
     private Brand brand;
 
+    @ManyToOne
+    @JoinColumn(name = "category_id", nullable = false)
+    private Category category;
+
     @Column(name = "created_at")
     private Timestamp created_at;
 
@@ -124,5 +128,13 @@ public class Product {
 
     public void setUpdatedAt(Timestamp updated_at) {
         this.updated_at = updated_at;
+    }
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
     }
 }

@@ -3,7 +3,6 @@ package com.springboot.springboot.requests.brand;
 public class NewBrandRequest {
     private String name;
 
-
     private String img;
 
     public NewBrandRequest(String name, String img) {

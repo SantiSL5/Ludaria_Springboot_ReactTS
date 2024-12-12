@@ -3,12 +3,14 @@ package com.springboot.springboot.requests.category;
 public class NewCategoryRequest {
     private String name;
 
-
     private String img;
 
-    public NewCategoryRequest(String name, String img) {
+    private String type;
+
+    public NewCategoryRequest(String name, String img, String type) {
         this.name = name;
         this.img = img;
+        this.type = type;
     }
 
     public String getName() {
@@ -27,4 +29,11 @@ public class NewCategoryRequest {
         this.img = img;
     }
 
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
 }

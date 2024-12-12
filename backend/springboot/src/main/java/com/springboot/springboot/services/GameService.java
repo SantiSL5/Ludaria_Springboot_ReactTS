@@ -25,6 +25,9 @@ public class GameService {
     BrandService brandService;
 
     @Autowired
+    CategoryService categoryService;
+
+    @Autowired
     GameRepository gameRepository;
 
     public Game getGame(String id) throws Exception {
@@ -51,6 +54,8 @@ public class GameService {
             game.setType(ProductType.GAME);
             Brand brand = brandService.getBrand(newGame.getBrand());
             game.setBrand(brand);
+            Category category = categoryService.getCategory(newGame.getCategory());
+            game.setCategory(category);
             game.setAuthor(newGame.getAuthor());
             game.setDifficulty(newGame.getDifficulty());
             game.setLaunchDate(newGame.getLaunchDate());
@@ -92,6 +97,10 @@ public class GameService {
             if (updateGame.getBrand() != null ) {
                 Brand brand = brandService.getBrand(updateGame.getBrand());
                 game.setBrand(brand);
+            }
+            if (updateGame.getCategory() != null ) {
+                Category category = categoryService.getCategory(updateGame.getCategory());
+                game.setCategory(category);
             }
             if (updateGame.getAuthor() != null ) {
                 game.setAuthor(updateGame.getAuthor());

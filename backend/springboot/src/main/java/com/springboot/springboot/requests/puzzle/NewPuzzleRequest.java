@@ -19,13 +19,15 @@ public class NewPuzzleRequest {
 
     private Long brand;
 
+    private Long category;
+
     private String author;
 
     private Integer numPieces;
 
     private String difficulty;
 
-    public NewPuzzleRequest(String name, String description, BigDecimal price, String img, Integer age, String type, Long brand, String author, Integer numPieces, String difficulty) {
+    public NewPuzzleRequest(String name, String description, BigDecimal price, String img, Integer age, String type, Long brand, Long category, String author, Integer numPieces, String difficulty) {
         this.name = name;
         this.description = description;
         this.price = price;
@@ -33,6 +35,7 @@ public class NewPuzzleRequest {
         this.age = age;
         this.type = type;
         this.brand = brand;
+        this.category = category;
         this.author = author;
         this.numPieces = numPieces;
         this.difficulty = difficulty;
@@ -92,6 +95,14 @@ public class NewPuzzleRequest {
 
     public void setBrand(Long brand) {
         this.brand = brand;
+    }
+
+    public Long getCategory() {
+        return category;
+    }
+
+    public void setCategory(Long category) {
+        this.category = category;
     }
 
     public String getAuthor() {

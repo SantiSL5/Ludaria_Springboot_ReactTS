@@ -25,6 +25,9 @@ public class PuzzleService {
 
     @Autowired
     BrandService brandService;
+
+    @Autowired
+    CategoryService categoryService;
     
     public Puzzle getPuzzle(String id) throws Exception {
         try {
@@ -50,6 +53,8 @@ public class PuzzleService {
             puzzle.setType(ProductType.PUZZLE);
             Brand brand = brandService.getBrand(newPuzzle.getBrand());
             puzzle.setBrand(brand);
+            Category category = categoryService.getCategory(newPuzzle.getCategory());
+            puzzle.setCategory(category);
             puzzle.setAuthor(newPuzzle.getAuthor());
             puzzle.setNumPieces(newPuzzle.getNumPieces());
             puzzle.setDifficulty(newPuzzle.getDifficulty());
@@ -88,6 +93,10 @@ public class PuzzleService {
             if (updatePuzzle.getBrand() != null ) {
                 Brand brand = brandService.getBrand(updatePuzzle.getBrand());
                 puzzle.setBrand(brand);
+            }
+            if (updatePuzzle.getCategory() != null ) {
+                Category category = categoryService.getCategory(updatePuzzle.getCategory());
+                puzzle.setCategory(category);
             }
             if (updatePuzzle.getAuthor() != null ) {
                 puzzle.setAuthor(updatePuzzle.getAuthor());

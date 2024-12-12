@@ -1,6 +1,7 @@
 package com.springboot.springboot.services;
 
 import com.springboot.springboot.model.Category;
+import com.springboot.springboot.model.ProductType;
 import com.springboot.springboot.requests.category.UpdateCategoryRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -49,6 +50,7 @@ public class CategoryService {
             Category category = new Category();
             category.setName(newCategory.getName());
             category.setImg(newCategory.getImg());
+            category.setType(ProductType.valueOf(newCategory.getType()));
             category.setCreatedAt(new Timestamp(System.currentTimeMillis()));
             category.setUpdatedAt(new Timestamp(System.currentTimeMillis()));
             categoryRepository.save(category);
@@ -70,6 +72,9 @@ public class CategoryService {
             }
             if (updatedCategory.getImg() != null ) {
                 category.setImg(updatedCategory.getImg());
+            }
+            if (updatedCategory.getType() != null ) {
+                category.setType(ProductType.valueOf(updatedCategory.getType()));
             }
 
             category.setUpdatedAt(new Timestamp(System.currentTimeMillis()));

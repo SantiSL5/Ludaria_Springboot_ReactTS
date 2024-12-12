@@ -27,6 +27,9 @@ public class AccessoryService {
     GameService gameService;
 
     @Autowired
+    CategoryService categoryService;
+
+    @Autowired
     AccessoryRepository accessoryRepository;
 
     public Accessory getAccessory(String id) throws Exception {
@@ -59,6 +62,8 @@ public class AccessoryService {
             } else {
                 accessory.setGame(null);
             }
+            Category category = categoryService.getCategory(newAccessory.getCategory());
+            accessory.setCategory(category);
             accessory.setCreatedAt(new Timestamp(System.currentTimeMillis()));
             accessory.setUpdatedAt(new Timestamp(System.currentTimeMillis()));
             accessoryRepository.save(accessory);
@@ -100,6 +105,10 @@ public class AccessoryService {
                 accessory.setGame(game);
             } else {
                 accessory.setGame(null);
+            }
+            if (updateAccessory.getCategory() != null ) {
+                Category category = categoryService.getCategory(updateAccessory.getCategory());
+                accessory.setCategory(category);
             }
 
             accessory.setUpdatedAt(new Timestamp(System.currentTimeMillis()));

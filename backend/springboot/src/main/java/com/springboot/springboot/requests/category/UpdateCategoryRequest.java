@@ -4,6 +4,8 @@ public class UpdateCategoryRequest {
     private String name;
     private String img;
 
+    private String type;
+
     public UpdateCategoryRequest() {
     }
 
@@ -23,4 +25,11 @@ public class UpdateCategoryRequest {
         this.img = img;
     }
 
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
 }

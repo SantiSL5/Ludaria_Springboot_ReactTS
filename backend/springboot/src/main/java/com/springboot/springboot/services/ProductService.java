@@ -50,37 +50,6 @@ public class ProductService {
         return optional.orElse(null);
     }
 
-    public ResponseEntity<?> createProduct(Product product) {
-        try {
-            product.setCreatedAt(new Timestamp(System.currentTimeMillis()));
-            product.setUpdatedAt(new Timestamp(System.currentTimeMillis()));
-            productRepository.save(product);
-            return new ResponseEntity<>(product, HttpStatus.CREATED);
-        } catch (Exception e) {
-            logger.error("Error creating product: {}", e.getMessage());
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-        }
-    }
-
-    public ResponseEntity<?> updateProduct(Long id, Product updatedProduct) {
-        try {
-            Product product = getProduct(id);
-            if (product == null) {
-                return ResponseEntity.badRequest().body("Product not found");
-            }
-            if (updatedProduct.getName() != null) product.setName(updatedProduct.getName());
-            if (updatedProduct.getDescription() != null) product.setDescription(updatedProduct.getDescription());
-            if (updatedProduct.getPrice() != null) product.setPrice(updatedProduct.getPrice());
-            if (updatedProduct.getAge() != null) product.setAge(updatedProduct.getAge());
-            product.setUpdatedAt(new Timestamp(System.currentTimeMillis()));
-            productRepository.save(product);
-            return ResponseEntity.ok(product);
-        } catch (Exception e) {
-            logger.error("Error updating product: {}", e.getMessage());
-            return ResponseEntity.badRequest().body("Product update failed");
-        }
-    }
-
     public void deleteProduct(Long id) {
         try {
             productRepository.deleteById(id);

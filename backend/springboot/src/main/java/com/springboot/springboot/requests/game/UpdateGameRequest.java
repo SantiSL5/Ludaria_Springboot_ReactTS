@@ -18,6 +18,8 @@ public class UpdateGameRequest {
 
     private Long brand;
 
+    private Long category;
+
     private String author;
 
     private String difficulty;
@@ -89,6 +91,15 @@ public class UpdateGameRequest {
     public void setBrand(Long brand) {
         this.brand = brand;
     }
+
+    public Long getCategory() {
+        return category;
+    }
+
+    public void setCategory(Long category) {
+        this.category = category;
+    }
+
 
     public String getAuthor() {
         return author;

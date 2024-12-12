@@ -21,6 +21,8 @@ public class NewGameRequest {
 
     private Long brand;
 
+    private Long category;
+
     private String author;
 
     private String difficulty;
@@ -33,7 +35,7 @@ public class NewGameRequest {
 
     private Integer maxPlayers;
 
-    public NewGameRequest(String name, String description, BigDecimal price, String img, Integer age, String type, Long brand, String author, String difficulty, String launchDate, Integer duration, Integer minPlayers, Integer maxPlayers) {
+    public NewGameRequest(String name, String description, BigDecimal price, String img, Integer age, String type, Long brand, Long category, String author, String difficulty, String launchDate, Integer duration, Integer minPlayers, Integer maxPlayers) {
         this.name = name;
         this.description = description;
         this.price = price;
@@ -47,6 +49,7 @@ public class NewGameRequest {
         this.duration = duration;
         this.minPlayers = minPlayers;
         this.maxPlayers = maxPlayers;
+        this.category = category;
     }
 
     public String getName() {
@@ -103,6 +106,14 @@ public class NewGameRequest {
 
     public void setBrand(Long brand) {
         this.brand = brand;
+    }
+
+    public Long getCategory() {
+        return category;
+    }
+
+    public void setCategory(Long category) {
+        this.category = category;
     }
 
     public String getAuthor() {
