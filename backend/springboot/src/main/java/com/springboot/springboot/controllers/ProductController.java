@@ -1,6 +1,7 @@
 package com.springboot.springboot.controllers;
 
 import com.springboot.springboot.model.Product;
+import com.springboot.springboot.model.ProductType;
 import com.springboot.springboot.requests.accessory.NewAccessoryRequest;
 import com.springboot.springboot.requests.game.NewGameRequest;
 import com.springboot.springboot.requests.general.DeleteManyRequest;
@@ -30,9 +31,10 @@ public class ProductController {
 
 
     @GetMapping("/product")
-    public ResponseEntity<?> getAllProducts(@RequestParam(value = "limit", required = false, defaultValue = "0") Integer limit,
-                                            @RequestParam(value = "offset", required = false) Integer offset) {
-        return productService.getProducts(limit, offset);
+    public ResponseEntity<?> getAllProducts(@RequestParam(value = "limit", required = false, defaultValue = "0") String limit,
+                                            @RequestParam(value = "offset", required = false) String offset,
+                                            @RequestParam(value = "type", required = false) String type) {
+        return productService.getProducts(limit, offset, type);
     }
 
     @GetMapping("/product/{id}")

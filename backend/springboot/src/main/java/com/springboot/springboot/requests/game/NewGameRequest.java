@@ -17,8 +17,6 @@ public class NewGameRequest {
 
     private Integer age;
 
-    private String type;
-
     private Long brand;
 
     private Long category;
@@ -35,13 +33,12 @@ public class NewGameRequest {
 
     private Integer maxPlayers;
 
-    public NewGameRequest(String name, String description, BigDecimal price, String img, Integer age, String type, Long brand, Long category, String author, String difficulty, String launchDate, Integer duration, Integer minPlayers, Integer maxPlayers) {
+    public NewGameRequest(String name, String description, BigDecimal price, String img, Integer age, Long brand, Long category, String author, String difficulty, String launchDate, Integer duration, Integer minPlayers, Integer maxPlayers) {
         this.name = name;
         this.description = description;
         this.price = price;
         this.img = img;
         this.age = age;
-        this.type = type;
         this.brand = brand;
         this.author = author;
         this.difficulty = difficulty;
@@ -90,14 +87,6 @@ public class NewGameRequest {
 
     public void setAge(Integer age) {
         this.age = age;
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
     }
 
     public Long getBrand() {

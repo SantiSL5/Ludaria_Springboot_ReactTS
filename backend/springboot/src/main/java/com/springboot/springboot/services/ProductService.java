@@ -5,6 +5,9 @@ import com.springboot.springboot.repository.ProductRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -21,16 +24,18 @@ public class ProductService {
 
     private static final Logger logger = LoggerFactory.getLogger(ProductService.class);
 
-    public ResponseEntity<?> getProducts(Integer limit, Integer offset) {
+    public ResponseEntity<?> getProducts(String limit, String offset, String type) {
         try {
-            List<Product> products = new ArrayList<>();
-            if (limit != null && offset != null) {
-                getAllProducts(limit, offset).forEach(products::add);
+            if (limit != null && offset != null){
+                Pageable pageable = PageRequest.of(Integer.parseInt(offset) , Integer.parseInt(limit));
+                Page<Product> productPage = productRepository.findProductsByFiltersPag(pageable, type == null ? null : ProductType.valueOf(type));
+                List<Product> products = productPage.getContent();
+                return new ResponseEntity<>(products, HttpStatus.OK);
             } else {
-                getAllProducts().forEach(products::add);
+                List<Product> products = new ArrayList<>();
+                products.addAll(productRepository.findProductsByFilters(type == null ? null : ProductType.valueOf(type)));
+                return new ResponseEntity<>(products, HttpStatus.OK);
             }
-
-            return new ResponseEntity<>(products, HttpStatus.OK);
         } catch (Exception e) {
             logger.error("Error getting products: {}", e.getMessage());
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);

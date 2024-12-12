@@ -46,17 +46,15 @@ const CreateUpdate = ({
         }
 
         if (operation === "create") {
-            console.log("Resetting form for create");
             reset();
         }
     }, [operation, updateData, reset]);
 
     const onSubmit = (data: IFormInputs) => {
         if (operation === "create") {
-            console.log("Creating category...");
             createCategory(data);
         } else if (operation === "update") {
-            console.log("Updating category...");
+
             updateCategory(data);
             changeForm(null, "create");
         }

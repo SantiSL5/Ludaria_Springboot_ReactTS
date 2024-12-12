@@ -13,21 +13,19 @@ public class NewAccessoryRequest {
 
     private Integer age;
 
-    private String type;
-
     private Long brand;
 
     private Long category;
 
     private Long gameId;
 
-    public NewAccessoryRequest(String name, String description, BigDecimal price, String img, Integer age, String type, Long brand, Long category, Long gameId) {
+    public NewAccessoryRequest(String name, String description, BigDecimal price, String img, Integer age, Long brand, Long category, Long gameId) {
         this.name = name;
+        this.category = category;
         this.description = description;
         this.price = price;
         this.img = img;
         this.age = age;
-        this.type = type;
         this.brand = brand;
         this.gameId = gameId;
     }
@@ -70,14 +68,6 @@ public class NewAccessoryRequest {
 
     public void setAge(Integer age) {
         this.age = age;
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
     }
 
     public Long getBrand() {
