@@ -1,9 +1,32 @@
 import DataTable from 'react-data-table-component';
 import React from "react";
 
+interface IAccessory {
+    id: number;
+    name: string;
+    description: string;
+    price: string;
+    img: string;
+    age: number;
+    brand: { name: string };
+    category: { name: string };
+    game: number;
+}
 
-const List = ({ list, deleteBrand, deleteManyBrands, changeForm }: any) => {
-    const [selectedRows, setSelectedRows]: any = React.useState(false);
+interface IListAccessoriesProps {
+    list: IAccessory[];
+    deleteProduct: (id: number) => void;
+    deleteManyProducts: (ids: IAccessory[]) => void;
+    changeForm: (data: IAccessory | null, operation: "create" | "update") => void;
+}
+
+const ListAccessories = ({
+    list,
+    deleteProduct,
+    deleteManyProducts,
+    changeForm,
+}: IListAccessoriesProps) => {
+    const [selectedRows, setSelectedRows] = React.useState<IAccessory[]>([]);
     const [toggledClearRows] = React.useState(false);
 
     const handleChange = ({ selectedRows }: any) => {
@@ -12,8 +35,8 @@ const List = ({ list, deleteBrand, deleteManyBrands, changeForm }: any) => {
 
     const customSort = (rows: any, selector: any, direction: any) => {
         return rows.sort((rowA: any, rowB: any) => {
-            const aField = selector(rowA)
-            const bField = selector(rowB)
+            const aField = selector(rowA);
+            const bField = selector(rowB);
 
             let comparison = 0;
             if (aField.props || bField.props) {
@@ -46,8 +69,38 @@ const List = ({ list, deleteBrand, deleteManyBrands, changeForm }: any) => {
             sortable: true
         },
         {
+            name: 'Description',
+            selector: (row: any) => row.description,
+            sortable: true
+        },
+        {
+            name: 'Price',
+            selector: (row: any) => row.price,
+            sortable: true
+        },
+        {
             name: 'Img',
             selector: (row: any) => row.img,
+            sortable: true
+        },
+        {
+            name: 'Age',
+            selector: (row: any) => row.age,
+            sortable: true
+        },
+        {
+            name: 'Brand',
+            selector: (row: any) => row.brand.name,
+            sortable: true
+        },
+        {
+            name: 'Category',
+            selector: (row: any) => row.category.name,
+            sortable: true
+        },
+        {
+            name: 'Game ID',
+            selector: (row: any) => row.game.name,
             sortable: true
         },
         {
@@ -61,9 +114,9 @@ const List = ({ list, deleteBrand, deleteManyBrands, changeForm }: any) => {
                     >Update</button>
                     <button type="button" className="bg-red-600 text-white px-4 py-2 rounded"
                         onClick={() => {
-                            deleteBrand(row.id);
+                            deleteProduct(row.id);
                         }}
-                    > Delete</button>
+                    >Delete</button>
                 </div>,
             sortable: false
         },
@@ -74,22 +127,20 @@ const List = ({ list, deleteBrand, deleteManyBrands, changeForm }: any) => {
             <button type="button" className="mt-2 mb-2 ml-2 bg-red-600 text-white text-base px-4 py-2 rounded disabled:opacity-50"
                 disabled={selectedRows.length === 0}
                 onClick={() => {
-                    deleteManyBrands(selectedRows);
+                    deleteManyProducts(selectedRows);
                 }}>Delete selected</button>
 
-            {
-                <DataTable
-                    sortFunction={customSort}
-                    columns={columns}
-                    data={list}
-                    pagination
-                    selectableRows
-                    onSelectedRowsChange={handleChange}
-                    clearSelectedRows={toggledClearRows}
-                />
-            }
+            <DataTable
+                sortFunction={customSort}
+                columns={columns}
+                data={list}
+                pagination
+                selectableRows
+                onSelectedRowsChange={handleChange}
+                clearSelectedRows={toggledClearRows}
+            />
         </div>
     );
-}
+};
 
-export default List;
+export default ListAccessories;

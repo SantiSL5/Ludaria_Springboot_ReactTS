@@ -23,6 +23,9 @@ const MenuAdmin = () => {
                         <NavLink className={({ isActive }) => (isActive ? "admin-link-active" : "admin-link")} to="/admin/puzzles">
                             PUZZLES
                         </NavLink>
+                        <NavLink className={({ isActive }) => (isActive ? "admin-link-active" : "admin-link")} to="/admin/accessories">
+                            ACCESORIES
+                        </NavLink>
                     </div>
                 </div>
             </nav>

@@ -36,8 +36,8 @@ export function useProducts() {
         })
     })
 
-    const getAllAccessories = (() => {
-        consume(queryConsumer.apiProduct, productQueries.getAllProducts, { type: "ACCESSORY" }).then((res: any) => {
+    const getAllAccessories = ((type: string) => {
+        consume(queryConsumer.apiProduct, productQueries.getAllProducts, { type }).then((res: any) => {
             console.log(res);
             setProducts(res.data)
         }).catch((e: any) => {
