@@ -44,6 +44,7 @@ const CreateUpdate = ({
     React.useEffect(() => {
         if (operation === "update" && updateData) {
             reset({
+                id:updateData.id,
                 name: updateData.name,
                 description: updateData.description,
                 price: updateData.price,

@@ -18,8 +18,8 @@ export function useProducts() {
         })
     })
 
-    const getAllGames = (() => {
-        consume(queryConsumer.apiProduct, productQueries.getAllProducts, { type: "GAME" }).then((res: any) => {
+    const getAllGames = ((type: string) => {
+        consume(queryConsumer.apiProduct, productQueries.getAllProducts, { type }).then((res: any) => {
             console.log(res);
             setProducts(res.data)
         }).catch((e: any) => {
@@ -91,7 +91,7 @@ export function useProducts() {
         })
     })
 
-    return { product, products, loading, setLoading, getProduct, getAllProducts, getAllPuzzles, deleteProduct, deleteManyProducts };
+    return { product, products, loading, setLoading, getProduct, getAllProducts, getAllPuzzles, getAllGames, getAllAccessories, deleteProduct, deleteManyProducts };
 
 }
 
