@@ -6,21 +6,22 @@ interface IFormInputs {
     id: number;
     name: string;
     img: string;
+    type: string;
 }
 
 interface ICreateUpdateProps {
-    createBrand: (data: IFormInputs) => void;
+    createCategory: (data: IFormInputs) => void;
     operation: "create" | "update";
     updateData: IFormInputs | null;
-    updateBrand: (data: IFormInputs) => void;
+    updateCategory: (data: IFormInputs) => void;
     changeForm: (data: IFormInputs | null, operation: "create" | "update") => void;
 }
 
 const CreateUpdate = ({
-    createBrand,
+    createCategory,
     operation,
     updateData,
-    updateBrand,
+    updateCategory,
     changeForm,
 }: ICreateUpdateProps) => {
 
@@ -40,19 +41,23 @@ const CreateUpdate = ({
                 id: updateData.id,
                 name: updateData.name,
                 img: updateData.img,
+                type: updateData.type,
             });
         }
 
         if (operation === "create") {
+            console.log("Resetting form for create");
             reset();
         }
     }, [operation, updateData, reset]);
 
     const onSubmit = (data: IFormInputs) => {
         if (operation === "create") {
-            createBrand(data);
+            console.log("Creating category...");
+            createCategory(data);
         } else if (operation === "update") {
-            updateBrand(data);
+            console.log("Updating category...");
+            updateCategory(data);
             changeForm(null, "create");
         }
     };
@@ -112,6 +117,37 @@ const CreateUpdate = ({
                         />
                     </label>
                 </div>
+                <div className="mb-2">
+                    <label htmlFor="type" className="text-dark">
+                        Category:
+                        <select
+                            id="category"
+                            className="m-2 px-4 py-2 border border-gray-300 rounded"
+                            {...register("type", {
+                                required: "This field is required.",
+                            })}
+                        >
+                            <option value="">Select a category</option>
+                            <option value="GAME">GAME</option>
+                            <option value="ACCESSORY">ACCESSORY</option>
+                            <option value="PUZZLE">PUZZLE</option>
+                        </select>
+                        <ErrorMessage
+                            errors={errors}
+                            name="type"
+                            render={({ messages }) => {
+                                return messages
+                                    ? Object.entries(messages).map(([type, message]) => (
+                                        <p className="text-red-500" key={type}>
+                                            {message}
+                                        </p>
+                                    ))
+                                    : null;
+                            }}
+                        />
+                    </label>
+                </div>
+
 
                 {operation === "create" ? (
                     <button

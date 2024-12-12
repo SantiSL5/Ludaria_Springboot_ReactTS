@@ -5,6 +5,7 @@ import Home from "../pages/Home";
 import Admin from '../pages/Admin';
 import Layout from "../layout";
 import AdminBrands from '../pages/Admin/brands';
+import AdminCategories from '../pages/Admin/categories';
 
 
 const Router = () => {
@@ -18,7 +19,7 @@ const Router = () => {
                         <Route path="/admin/" >
                         <Route index element={<Admin />} />
                             <Route path="brands/" element={<AdminBrands />}/>
-                            <Route path="categories/" />
+                            <Route path="categories/" element={<AdminCategories />}/>
                             <Route path="products/" />
                         </Route>
                     </Route>
