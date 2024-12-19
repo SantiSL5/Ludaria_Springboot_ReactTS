@@ -17,6 +17,8 @@ public class NewGameRequest {
 
     private Integer age;
 
+    private Integer stock;
+
     private Long brand;
 
     private Long category;
@@ -33,12 +35,13 @@ public class NewGameRequest {
 
     private Integer maxPlayers;
 
-    public NewGameRequest(String name, String description, BigDecimal price, String img, Integer age, Long brand, Long category, String author, String difficulty, String launchDate, Integer duration, Integer minPlayers, Integer maxPlayers) {
+    public NewGameRequest(String name, String description, BigDecimal price, String img, Integer age, Integer stock, Long brand, Long category, String author, String difficulty, String launchDate, Integer duration, Integer minPlayers, Integer maxPlayers) {
         this.name = name;
         this.description = description;
         this.price = price;
         this.img = img;
         this.age = age;
+        this.stock = stock;
         this.brand = brand;
         this.author = author;
         this.difficulty = difficulty;
@@ -87,6 +90,14 @@ public class NewGameRequest {
 
     public void setAge(Integer age) {
         this.age = age;
+    }
+
+    public Integer getStock() {
+        return stock;
+    }
+
+    public void setStock(Integer stock) {
+        this.stock = stock;
     }
 
     public Long getBrand() {

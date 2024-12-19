@@ -15,6 +15,8 @@ public class UpdatePuzzleRequest {
 
     private Integer age;
 
+    private Integer stock;
+
     private String type;
 
     private Long brand;
@@ -69,6 +71,14 @@ public class UpdatePuzzleRequest {
 
     public void setAge(Integer age) {
         this.age = age;
+    }
+
+    public Integer getStock() {
+        return stock;
+    }
+
+    public void setStock(Integer stock) {
+        this.stock = stock;
     }
 
     public String getType() {

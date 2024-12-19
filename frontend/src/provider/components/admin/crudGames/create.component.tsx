@@ -9,6 +9,7 @@ interface IFormInputs {
     price: string;
     img: string;
     age: number;
+    stock: number;
     brand: number;
     category: number;
     author: string;
@@ -53,6 +54,7 @@ const CreateUpdateGame = ({
                 price: updateData.price,
                 img: updateData.img,
                 age: updateData.age,
+                stock: updateData.stock,
                 brand: updateData.brand.id ? updateData.brand.id : updateData.brand,
                 category: updateData.category.id ? updateData.category.id : updateData.category,
                 author: updateData.author,
@@ -158,7 +160,7 @@ const CreateUpdateGame = ({
 
             <div className="mb-2">
                 <label htmlFor="img" className="text-dark">
-                    Img URL:
+                    Img:
                     <input
                         id="img"
                         type="text"
@@ -193,6 +195,31 @@ const CreateUpdateGame = ({
                     <ErrorMessage
                         errors={errors}
                         name="age"
+                        render={({ messages }) => {
+                            return messages
+                                ? Object.entries(messages).map(([type, message]) => (
+                                      <p className="text-red-500" key={type}>
+                                          {message}
+                                      </p>
+                                  ))
+                                : null;
+                        }}
+                    />
+                </label>
+            </div>
+
+            <div className="mb-2">
+                <label htmlFor="stock" className="text-dark">
+                    Stock:
+                    <input
+                        id="stock"
+                        type="number"
+                        className="m-2 px-4 py-2 border border-gray-300 rounded"
+                        {...register("stock", { required: "This input is required." })}
+                    />
+                    <ErrorMessage
+                        errors={errors}
+                        name="stock"
                         render={({ messages }) => {
                             return messages
                                 ? Object.entries(messages).map(([type, message]) => (

@@ -50,6 +50,7 @@ public class PuzzleService {
             puzzle.setPrice(newPuzzle.getPrice());
             puzzle.setImg(newPuzzle.getImg());
             puzzle.setAge(newPuzzle.getAge());
+            puzzle.setStock(newPuzzle.getStock());
             puzzle.setType(ProductType.PUZZLE);
             Brand brand = brandService.getBrand(newPuzzle.getBrand());
             puzzle.setBrand(brand);
@@ -89,6 +90,9 @@ public class PuzzleService {
             }
             if (updatePuzzle.getAge() != null ) {
                 puzzle.setAge(updatePuzzle.getAge());
+            }
+            if (updatePuzzle.getStock() != null ) {
+                puzzle.setStock(updatePuzzle.getStock());
             }
             if (updatePuzzle.getBrand() != null ) {
                 Brand brand = brandService.getBrand(updatePuzzle.getBrand());

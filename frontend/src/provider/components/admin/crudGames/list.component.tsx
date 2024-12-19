@@ -65,6 +65,11 @@ const ListGames = ({ list, deleteProduct, deleteManyProducts, changeForm }: any)
             sortable: true
         },
         {
+            name: 'Stock',
+            selector: (row: any) => row.stock,
+            sortable: true
+        },
+        {
             name: 'Brand',
             selector: (row: any) => row.brand.name,
             sortable: true

@@ -51,6 +51,7 @@ public class GameService {
             game.setPrice(newGame.getPrice());
             game.setImg(newGame.getImg());
             game.setAge(newGame.getAge());
+            game.setStock(newGame.getStock());
             game.setType(ProductType.GAME);
             Brand brand = brandService.getBrand(newGame.getBrand());
             game.setBrand(brand);
@@ -93,6 +94,9 @@ public class GameService {
             }
             if (updateGame.getAge() != null ) {
                 game.setAge(updateGame.getAge());
+            }
+            if (updateGame.getStock() != null ) {
+                game.setStock(updateGame.getStock());
             }
             if (updateGame.getBrand() != null ) {
                 Brand brand = brandService.getBrand(updateGame.getBrand());

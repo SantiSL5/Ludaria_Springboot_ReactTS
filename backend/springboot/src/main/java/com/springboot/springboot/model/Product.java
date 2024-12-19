@@ -29,6 +29,9 @@ public class Product {
     @Column(name = "age")
     private Integer age;
 
+    @Column(name = "stock")
+    private Integer stock;
+
     @Column(name = "type")
     @Enumerated(EnumType.STRING)
     private ProductType type;
@@ -96,6 +99,14 @@ public class Product {
 
     public void setAge(Integer age) {
         this.age = age;
+    }
+
+    public Integer getStock() {
+        return stock;
+    }
+
+    public void setStock(Integer stock) {
+        this.stock = stock;
     }
 
     public ProductType getType() {

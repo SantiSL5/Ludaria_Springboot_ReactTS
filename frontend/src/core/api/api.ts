@@ -5,10 +5,11 @@ import { jwtQueries, queryConsumer } from "../queries";
 interface AxiosInterface {
     method: string,
     url: string,
-    data?: any
+    data?: any,
+    params?: { [key: string]: any };
 }
 
-const Api = ({ method, url, data }: AxiosInterface) => {
+const Api = ({ method, url, data, params }: AxiosInterface) => {
     const token = consume(queryConsumer.apiJwt, jwtQueries.getToken);
     let res: any;
 
@@ -18,6 +19,7 @@ const Api = ({ method, url, data }: AxiosInterface) => {
                 method: method,
                 url: url,
                 data: data,
+                params: params,
                 headers: {
                     "Authorization": `Bearer ${token}`
                 }

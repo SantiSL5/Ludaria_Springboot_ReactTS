@@ -1,32 +1,8 @@
 import DataTable from 'react-data-table-component';
 import React from "react";
 
-interface IAccessory {
-    id: number;
-    name: string;
-    description: string;
-    price: string;
-    img: string;
-    age: number;
-    brand: { name: string };
-    category: { name: string };
-    game: number;
-}
-
-interface IListAccessoriesProps {
-    list: IAccessory[];
-    deleteProduct: (id: number) => void;
-    deleteManyProducts: (ids: IAccessory[]) => void;
-    changeForm: (data: IAccessory | null, operation: "create" | "update") => void;
-}
-
-const ListAccessories = ({
-    list,
-    deleteProduct,
-    deleteManyProducts,
-    changeForm,
-}: IListAccessoriesProps) => {
-    const [selectedRows, setSelectedRows] = React.useState<IAccessory[]>([]);
+const ListAccessories = ({ list, deleteProduct, deleteManyProducts, changeForm }: any) => {
+    const [selectedRows, setSelectedRows]: any = React.useState(false);
     const [toggledClearRows] = React.useState(false);
 
     const handleChange = ({ selectedRows }: any) => {
@@ -86,6 +62,11 @@ const ListAccessories = ({
         {
             name: 'Age',
             selector: (row: any) => row.age,
+            sortable: true
+        },
+        {
+            name: 'Stock',
+            selector: (row: any) => row.stock,
             sortable: true
         },
         {

@@ -53,6 +53,7 @@ public class AccessoryService {
             accessory.setPrice(newAccessory.getPrice());
             accessory.setImg(newAccessory.getImg());
             accessory.setAge(newAccessory.getAge());
+            accessory.setStock(newAccessory.getStock());
             accessory.setType(ProductType.ACCESSORY);
             Brand brand = brandService.getBrand(newAccessory.getBrand());
             accessory.setBrand(brand);
@@ -95,6 +96,9 @@ public class AccessoryService {
             }
             if (updateAccessory.getAge() != null ) {
                 accessory.setAge(updateAccessory.getAge());
+            }
+            if (updateAccessory.getStock() != null ) {
+                accessory.setStock(updateAccessory.getStock());
             }
             if (updateAccessory.getBrand() != null ) {
                 Brand brand = brandService.getBrand(updateAccessory.getBrand());
