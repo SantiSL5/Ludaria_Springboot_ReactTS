@@ -1,9 +1,14 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+
+import Layout from "../layout";
+
 import Home from "../pages/Home";
 import Admin from '../pages/Admin';
-import Layout from "../layout";
+import Register from '../pages/Register';
+import Login from '../pages/Login';
+
 import AdminBrands from '../pages/Admin/brands';
 import AdminCategories from '../pages/Admin/categories';
 import AdminProducts from '../pages/Admin/products';
@@ -19,6 +24,8 @@ const Router = () => {
                 <Routes>
                     <Route path="/" element={<Home />}></Route>
                     <Route path="/admin" element={<Admin />}></Route>
+                    <Route path="/login" element={<Login />}></Route>
+                    <Route path="/register" element={<Register />}></Route>
                     <Route>
                         <Route path="/admin/" >
                         <Route index element={<Admin />} />

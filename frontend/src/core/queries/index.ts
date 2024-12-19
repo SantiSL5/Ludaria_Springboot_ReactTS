@@ -5,9 +5,13 @@ import productQueries from "./productQueries";
 import gameQueries from "./gameQueries";
 import puzzleQueries from "./puzzleQueries";
 import accessoryQueries from "./accessoryQueries";
+import jwtQueries from "./jwtQueries";
+import userQueries from "./userQueries";
 
 export {
     queryConsumer,
+    jwtQueries,
+    userQueries,
     brandQueries,
     categoryQueries,
     productQueries,

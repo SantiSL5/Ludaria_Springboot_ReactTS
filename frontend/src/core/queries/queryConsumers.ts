@@ -1,4 +1,6 @@
 const queryConsumer: any = {
+    apiJwt: "ApiJwt",
+    apiUser: "ApiUser",
     apiBrand: "ApiBrand",
     apiCategory: "ApiCategory",
     apiProduct: "ApiProduct",
