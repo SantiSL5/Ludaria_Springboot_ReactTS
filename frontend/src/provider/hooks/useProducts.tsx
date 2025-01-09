@@ -7,6 +7,7 @@ export function useProducts() {
 
     const [product, setProduct]: any = useState(undefined);
     const [products, setProducts]: any = useState(undefined);
+    const [pages, setPages]: any = useState(undefined);
     const [loading, setLoading]: any = useState(true);
 
     const getAllProducts = (() => {
@@ -17,6 +18,16 @@ export function useProducts() {
             console.log(e);
         })
     })
+
+    const getProductsFilters = ((limit: number, offset: number) => {
+        consume(queryConsumer.apiProduct, productQueries.getAllProducts, {limit, offset}).then((res: any) => {
+                console.log(res);
+                setProducts(res.data.products)
+                setPages(res.data.pages)
+            }).catch((e: any) => {
+                console.error(e);
+            });
+    });
 
     const getAllGames = ((type: string) => {
         consume(queryConsumer.apiProduct, productQueries.getAllProducts, { type }).then((res: any) => {
@@ -91,7 +102,7 @@ export function useProducts() {
         })
     })
 
-    return { product, products, loading, setLoading, getProduct, getAllProducts, getAllPuzzles, getAllGames, getAllAccessories, deleteProduct, deleteManyProducts };
+    return { product, products, pages, loading, setLoading, getProduct, getAllProducts, getProductsFilters, getAllPuzzles, getAllGames, getAllAccessories, deleteProduct, deleteManyProducts };
 
 }
 

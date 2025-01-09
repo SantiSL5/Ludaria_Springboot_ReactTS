@@ -2,6 +2,7 @@ package com.springboot.springboot.services;
 
 import com.springboot.springboot.model.*;
 import com.springboot.springboot.repository.ProductRepository;
+import com.springboot.springboot.resources.ProductsResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +13,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -30,7 +30,8 @@ public class ProductService {
                 Pageable pageable = PageRequest.of(Integer.parseInt(offset) , Integer.parseInt(limit));
                 Page<Product> productPage = productRepository.findProductsByFiltersPag(pageable, type == null ? null : ProductType.valueOf(type));
                 List<Product> products = productPage.getContent();
-                return new ResponseEntity<>(products, HttpStatus.OK);
+                ProductsResponse response = new ProductsResponse(productPage.getTotalPages(), products);
+                return new ResponseEntity<>(response, HttpStatus.OK);
             } else {
                 List<Product> products = new ArrayList<>();
                 products.addAll(productRepository.findProductsByFilters(type == null ? null : ProductType.valueOf(type)));

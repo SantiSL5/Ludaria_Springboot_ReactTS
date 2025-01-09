@@ -94,6 +94,9 @@ public class PuzzleService {
             if (updatePuzzle.getStock() != null ) {
                 puzzle.setStock(updatePuzzle.getStock());
             }
+            if (updatePuzzle.getNumPieces() != null ) {
+                puzzle.setNumPieces(updatePuzzle.getNumPieces());
+            }
             if (updatePuzzle.getBrand() != null ) {
                 Brand brand = brandService.getBrand(updatePuzzle.getBrand());
                 puzzle.setBrand(brand);
