@@ -10,7 +10,7 @@
   font-weight: 400;
 
   color-scheme: light dark;
-  background-color: #ECECEC;
+  background-color: #FFFFFF;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -19,7 +19,7 @@
 }
 
 body {
-  font-size: 6rem;
+  font-size: 1rem;
   margin: 0;
   min-width: 320px;
   min-height: 100vh;

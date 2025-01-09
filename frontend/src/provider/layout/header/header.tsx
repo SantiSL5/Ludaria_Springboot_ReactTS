@@ -43,7 +43,6 @@ const Header = () => {
                     {
                     user ? (
                         <>
-
                             <Avatar img={user.data.photo} rounded={true} />
 
                             <a href="/profile" className="text-base">
@@ -64,6 +63,7 @@ const Header = () => {
                 </div>
                 <Navbar.Collapse>
                     <NavbarLinkActive href="/">HOME</NavbarLinkActive>
+                    <NavbarLinkActive href="/shop">SHOP</NavbarLinkActive>
                     {isAdmin ? <NavbarLinkActive href="/admin">ADMIN</NavbarLinkActive> : <></>}
                 </Navbar.Collapse>
             </Navbar>

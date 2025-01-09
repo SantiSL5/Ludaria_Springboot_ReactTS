@@ -8,6 +8,7 @@ import Home from "../pages/Home";
 import Admin from '../pages/Admin';
 import Register from '../pages/Register';
 import Login from '../pages/Login';
+import Shop from '../pages/Shop';
 
 import AdminBrands from '../pages/Admin/brands';
 import AdminCategories from '../pages/Admin/categories';
@@ -26,6 +27,7 @@ const Router = () => {
                     <Route path="/admin" element={<Admin />}></Route>
                     <Route path="/login" element={<Login />}></Route>
                     <Route path="/register" element={<Register />}></Route>
+                    <Route path="/shop" element={<Shop />}></Route>
                     <Route>
                         <Route path="/admin/" >
                         <Route index element={<Admin />} />
