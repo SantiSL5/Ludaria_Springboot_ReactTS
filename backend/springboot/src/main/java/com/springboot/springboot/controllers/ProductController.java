@@ -33,8 +33,12 @@ public class ProductController {
     @GetMapping("/product")
     public ResponseEntity<?> getAllProducts(@RequestParam(value = "limit", required = false, defaultValue = "0") String limit,
                                             @RequestParam(value = "offset", required = false) String offset,
-                                            @RequestParam(value = "type", required = false) String type) {
-        return productService.getProducts(limit, offset, type);
+                                            @RequestParam(value = "type", required = false) String type,
+                                            @RequestParam(value = "category", required = false) String category,
+                                            @RequestParam(value = "brand", required = false) String brand,
+                                            @RequestParam(value = "minPrice", required = false) String minPrice,
+                                            @RequestParam(value = "maxPrice", required = false) String maxPrice) {
+        return productService.getProducts(limit, offset, type, category, brand, minPrice, maxPrice);
     }
 
     @GetMapping("/product/{id}")

@@ -16,27 +16,49 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.math.BigDecimal;
 
 @Service
 public class ProductService {
     @Autowired
     private ProductRepository productRepository;
 
+    private BigDecimal parseBigDecimal(String value) {
+        return value == null ? null : new BigDecimal(value);
+    }
+
     private static final Logger logger = LoggerFactory.getLogger(ProductService.class);
 
-    public ResponseEntity<?> getProducts(String limit, String offset, String type) {
+    public ResponseEntity<?> getProducts(String limit, String offset, String type, String category, String brand, String minPrice, String maxPrice) {
         try {
-            if (limit != null && offset != null){
-                Pageable pageable = PageRequest.of(Integer.parseInt(offset) , Integer.parseInt(limit));
-                Page<Product> productPage = productRepository.findProductsByFiltersPag(pageable, type == null ? null : ProductType.valueOf(type));
-                List<Product> products = productPage.getContent();
-                ProductsResponse response = new ProductsResponse(productPage.getTotalPages(), products);
-                return new ResponseEntity<>(response, HttpStatus.OK);
+            Pageable pageable = null;
+            if (limit != null && offset != null) {
+                pageable = PageRequest.of(Integer.parseInt(offset), Integer.parseInt(limit));
+            }
+
+            Page<Product> productPage = null;
+            if (pageable != null) {
+                productPage = productRepository.findProductsByFiltersPag(pageable,
+                        type == null ? null : ProductType.valueOf(type),
+                        category == null ? null : Long.parseLong(category),
+                        brand == null ? null : Long.parseLong(brand),
+                        minPrice == null ? null : parseBigDecimal(minPrice),
+                        maxPrice == null ? null : parseBigDecimal(maxPrice)
+                );
             } else {
-                List<Product> products = new ArrayList<>();
-                products.addAll(productRepository.findProductsByFilters(type == null ? null : ProductType.valueOf(type)));
+                List<Product> products = productRepository.findProductsByFilters(
+                        type == null ? null : ProductType.valueOf(type),
+                        category == null ? null : Long.parseLong(category),
+                        brand == null ? null : Long.parseLong(brand),
+                        minPrice == null ? null : parseBigDecimal(minPrice),
+                        maxPrice == null ? null : parseBigDecimal(maxPrice)
+                );
                 return new ResponseEntity<>(products, HttpStatus.OK);
             }
+
+            List<Product> products = productPage.getContent();
+            ProductsResponse response = new ProductsResponse(productPage.getTotalPages(), products);
+            return new ResponseEntity<>(response, HttpStatus.OK);
         } catch (Exception e) {
             logger.error("Error getting products: {}", e.getMessage());
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);

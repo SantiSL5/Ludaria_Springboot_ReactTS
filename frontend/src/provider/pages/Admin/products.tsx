@@ -9,21 +9,9 @@ const AdminProducts = () => {
 
     if (!products) getAllProducts();
 
-    // const changeForm = (data: any, op: string) => {
-    //     if (op === "create") {
-    //         setOp(op);
-    //         setupdateData(null);
-    //     } else {
-    //         setOp(op);
-    //         setupdateData(data);
-    //     }
-    //     console.log("Updated state:", { op, updateData: data });
-    // };
-
     return (
         <div className="adminView">
             <MenuAdmin />
-            {/* <CreateProduct createProduct={createProduct} operation={op} updateData={updateData} updateProduct={updateProduct} changeForm={changeForm} /> */}
             {products ? <ListProducts list={products} deleteProduct={deleteProduct} deleteManyProducts={deleteManyProducts} ></ListProducts> : <Spinner />}
         </div>
     );

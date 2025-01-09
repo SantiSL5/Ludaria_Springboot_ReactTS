@@ -19,14 +19,23 @@ export function useProducts() {
         })
     })
 
-    const getProductsFilters = ((limit: number, offset: number) => {
-        consume(queryConsumer.apiProduct, productQueries.getAllProducts, {limit, offset}).then((res: any) => {
-                console.log(res);
-                setProducts(res.data.products)
-                setPages(res.data.pages)
-            }).catch((e: any) => {
-                console.error(e);
-            });
+    const getProductsFilters = ((limit: number, offset: number, filters: { 
+        type: string | null; 
+        category: string | null; 
+        brand: string | null; 
+        minPrice: number | null; 
+        maxPrice: number | null; 
+    }) => {
+        const { type, category, brand, minPrice, maxPrice} = filters;
+        console.log(filters);
+    
+        consume(queryConsumer.apiProduct, productQueries.getAllProducts, { limit, offset, type, category, brand, minPrice, maxPrice}).then((res: any) => {
+            console.log(res);
+            setProducts(res.data.products);
+            setPages(res.data.pages);
+        }).catch((e: any) => {
+            console.error(e);
+        });
     });
 
     const getAllGames = ((type: string) => {

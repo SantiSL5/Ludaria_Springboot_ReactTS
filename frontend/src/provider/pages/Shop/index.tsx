@@ -2,30 +2,50 @@ import ListComponent from '../../components/shop/listComponent'
 import FilterComponent from '../../components/shop/filterComponent';
 import { useProducts } from '../../hooks/useProducts';
 import Spinner from '../../components/spinner/spinner.component';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import PaginationComponent from '../../components/shop/paginationComponent';
+import { useCategories } from '../../hooks/useCategories';
+import { useBrands } from '../../hooks/useBrands';
 
 const ShopPage = () => {
     const { products, getProductsFilters, pages } = useProducts();
+    const { categories, getAllCategories } = useCategories();
+    const { brands, getAllBrands } = useBrands();
     const [currentPage, setCurrentPage] = useState(1);
 
-    if (!products) getProductsFilters(12,currentPage);
+    const [filters, setFilters] = useState({
+        type: null,
+        category: null,
+        brand: null,
+        minPrice: null,
+        maxPrice: null,
+    });
+
+    if (!products) getProductsFilters(12,currentPage -1, filters);
+    if (!categories) getAllCategories();
+    if (!brands) getAllBrands();
 
     const handlePageChange = (page: number) => {
         setCurrentPage(page);
-        getProductsFilters(12,page);
+        getProductsFilters(12, page-1, filters);
+    };
+
+    const handleFiltersChange = (newFilters: typeof filters) => {
+        setFilters(newFilters);
+        setCurrentPage(1);
+        getProductsFilters(12, 0, newFilters);
     };
 
     return (
     <div className="container mx-auto p-4">
         <div className="flex flex-col lg:flex-row gap-6">
-            <aside className="w-full lg:w-64 bg-gray-100 p-4 rounded-lg">
-                <FilterComponent />
+            <aside className="w-full lg:w-72 bg-gray-100 p-4 rounded-lg">
+                {categories && brands ? (<FilterComponent categories={categories} brands={brands} onFiltersChange={handleFiltersChange} />) : <Spinner />}
             </aside>
 
             <div className="flex-1">
                 {products ? (<ListComponent items={products} />) : <Spinner />}
-                {products ? (<PaginationComponent currentPage={currentPage} totalPages={pages-1} onPageChange={handlePageChange} />) : <Spinner />}
+                {products ? (<PaginationComponent currentPage={currentPage} totalPages={pages} onPageChange={handlePageChange} />) : <Spinner />}
             </div>
         </div>
     </div>
