@@ -27,7 +27,7 @@ export function useProducts() {
         maxPrice: number | null; 
     }) => {
         const { type, category, brand, minPrice, maxPrice} = filters;
-        console.log(filters);
+        console.log(limit,offset,filters);
     
         consume(queryConsumer.apiProduct, productQueries.getAllProducts, { limit, offset, type, category, brand, minPrice, maxPrice}).then((res: any) => {
             console.log(res);

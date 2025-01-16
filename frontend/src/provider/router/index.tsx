@@ -16,6 +16,7 @@ import AdminProducts from '../pages/Admin/products';
 import AdminPuzzles from '../pages/Admin/puzzles';
 import AdminGames from '../pages/Admin/games';
 import AdminAccessories from '../pages/Admin/accesories';
+import DetailsPage from '../pages/Details';
 
 
 const Router = () => {
@@ -28,6 +29,7 @@ const Router = () => {
                     <Route path="/login" element={<Login />}></Route>
                     <Route path="/register" element={<Register />}></Route>
                     <Route path="/shop" element={<Shop />}></Route>
+                    <Route path="/shop/details/:id" element={<DetailsPage />} />
                     <Route>
                         <Route path="/admin/" >
                         <Route index element={<Admin />} />

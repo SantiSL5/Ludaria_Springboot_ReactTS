@@ -1,4 +1,3 @@
-
 const brandQueries: any = {
     getBrand: "get",
     getAllBrands: "getAll",

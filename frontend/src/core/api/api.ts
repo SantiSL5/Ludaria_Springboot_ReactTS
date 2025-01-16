@@ -32,7 +32,8 @@ const Api = ({ method, url, data, params }: AxiosInterface) => {
             res = axios({
                 method: method,
                 url: url,
-                data: data
+                data: data,
+                params: params
             });
         } catch (e) {
             return e;
