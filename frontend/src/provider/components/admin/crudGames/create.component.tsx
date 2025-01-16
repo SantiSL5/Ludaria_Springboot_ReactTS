@@ -74,363 +74,368 @@ const CreateUpdateGame = ({
     const onSubmit = (data: IFormInputs) => {
         if (operation === "create") {
             createGame(data);
+            window.location.reload();
         } else if (operation === "update") {
             console.log(data);
             updateGame(data);
             changeForm(null, "create");
+            window.location.reload();
         }
     };
 
     return (
         <div className="m-4">
         <form onSubmit={handleSubmit(onSubmit)} className="text-base">
-            <div className="mb-2">
-                <label htmlFor="name" className="text-dark">
-                    Name:
-                    <input
-                        id="name"
-                        type="text"
-                        className="m-2 px-4 py-2 border border-gray-300 rounded"
-                        {...register("name", { required: "This input is required." })}
-                    />
-                    <ErrorMessage
-                        errors={errors}
-                        name="name"
-                        render={({ messages }) => {
-                            return messages
-                                ? Object.entries(messages).map(([type, message]) => (
-                                      <p className="text-red-500" key={type}>
-                                          {message}
-                                      </p>
-                                  ))
-                                : null;
-                        }}
-                    />
-                </label>
-            </div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 justify-items-center place-items-center">
+                <div className="mb-2 w-full">
+                    <label htmlFor="name" className="text-dark">
+                        Name:
+                        <input
+                            id="name"
+                            type="text"
+                            className="m-2 px-4 py-2 border border-gray-300 rounded"
+                            {...register("name", { required: "This input is required." })}
+                        />
+                        <ErrorMessage
+                            errors={errors}
+                            name="name"
+                            render={({ messages }) => {
+                                return messages
+                                    ? Object.entries(messages).map(([type, message]) => (
+                                        <p className="text-red-500" key={type}>
+                                            {message}
+                                        </p>
+                                    ))
+                                    : null;
+                            }}
+                        />
+                    </label>
+                </div>
 
-            <div className="mb-2">
-                <label htmlFor="description" className="text-dark">
-                    Description:
-                    <textarea
-                        id="description"
-                        className="m-2 px-4 py-2 border border-gray-300 rounded"
-                        {...register("description", { required: "This input is required." })}
-                    />
-                    <ErrorMessage
-                        errors={errors}
-                        name="description"
-                        render={({ messages }) => {
-                            return messages
-                                ? Object.entries(messages).map(([type, message]) => (
-                                      <p className="text-red-500" key={type}>
-                                          {message}
-                                      </p>
-                                  ))
-                                : null;
-                        }}
-                    />
-                </label>
-            </div>
+                <div className="mb-2 w-full">
+                    <label htmlFor="description" className="text-dark">
+                        Description:
+                        <textarea
+                            id="description"
+                            className="ml-2 border border-gray-300 rounded"
+                            {...register("description", { required: "This input is required." })}
+                        />
+                        <ErrorMessage
+                            errors={errors}
+                            name="description"
+                            render={({ messages }) => {
+                                return messages
+                                    ? Object.entries(messages).map(([type, message]) => (
+                                        <p className="text-red-500" key={type}>
+                                            {message}
+                                        </p>
+                                    ))
+                                    : null;
+                            }}
+                        />
+                    </label>
+                </div>
 
-            <div className="mb-2">
-                <label htmlFor="price" className="text-dark">
-                    Price:
-                    <input
-                        id="price"
-                        type="text"
-                        className="m-2 px-4 py-2 border border-gray-300 rounded"
-                        {...register("price", { required: "This input is required." })}
-                    />
-                    <ErrorMessage
-                        errors={errors}
-                        name="price"
-                        render={({ messages }) => {
-                            return messages
-                                ? Object.entries(messages).map(([type, message]) => (
-                                      <p className="text-red-500" key={type}>
-                                          {message}
-                                      </p>
-                                  ))
-                                : null;
-                        }}
-                    />
-                </label>
-            </div>
+                <div className="mb-2 w-full">
+                    <label htmlFor="price" className="text-dark">
+                        Price:
+                        <input
+                            id="price"
+                            type="text"
+                            className="m-2 px-4 py-2 border border-gray-300 rounded"
+                            {...register("price", { required: "This input is required." })}
+                        />
+                        <ErrorMessage
+                            errors={errors}
+                            name="price"
+                            render={({ messages }) => {
+                                return messages
+                                    ? Object.entries(messages).map(([type, message]) => (
+                                        <p className="text-red-500" key={type}>
+                                            {message}
+                                        </p>
+                                    ))
+                                    : null;
+                            }}
+                        />
+                    </label>
+                </div>
 
-            <div className="mb-2">
-                <label htmlFor="img" className="text-dark">
-                    Img:
-                    <input
-                        id="img"
-                        type="text"
-                        className="m-2 px-4 py-2 border border-gray-300 rounded"
-                        {...register("img", { required: "This input is required." })}
-                    />
-                    <ErrorMessage
-                        errors={errors}
-                        name="img"
-                        render={({ messages }) => {
-                            return messages
-                                ? Object.entries(messages).map(([type, message]) => (
-                                      <p className="text-red-500" key={type}>
-                                          {message}
-                                      </p>
-                                  ))
-                                : null;
-                        }}
-                    />
-                </label>
-            </div>
+                <div className="mb-2 w-full">
+                    <label htmlFor="img" className="text-dark">
+                        Img:
+                        <input
+                            id="img"
+                            type="text"
+                            className="m-2 px-4 py-2 border border-gray-300 rounded"
+                            {...register("img", { required: "This input is required." })}
+                        />
+                        <ErrorMessage
+                            errors={errors}
+                            name="img"
+                            render={({ messages }) => {
+                                return messages
+                                    ? Object.entries(messages).map(([type, message]) => (
+                                        <p className="text-red-500" key={type}>
+                                            {message}
+                                        </p>
+                                    ))
+                                    : null;
+                            }}
+                        />
+                    </label>
+                </div>
 
-            <div className="mb-2">
-                <label htmlFor="age" className="text-dark">
-                    Age:
-                    <input
-                        id="age"
-                        type="number"
-                        className="m-2 px-4 py-2 border border-gray-300 rounded"
-                        {...register("age", { required: "This input is required." })}
-                    />
-                    <ErrorMessage
-                        errors={errors}
-                        name="age"
-                        render={({ messages }) => {
-                            return messages
-                                ? Object.entries(messages).map(([type, message]) => (
-                                      <p className="text-red-500" key={type}>
-                                          {message}
-                                      </p>
-                                  ))
-                                : null;
-                        }}
-                    />
-                </label>
-            </div>
+                <div className="mb-2 w-full">
+                    <label htmlFor="age" className="text-dark">
+                        Age:
+                        <input
+                            id="age"
+                            type="number"
+                            className="m-2 px-4 py-2 border border-gray-300 rounded"
+                            {...register("age", { required: "This input is required." })}
+                        />
+                        <ErrorMessage
+                            errors={errors}
+                            name="age"
+                            render={({ messages }) => {
+                                return messages
+                                    ? Object.entries(messages).map(([type, message]) => (
+                                        <p className="text-red-500" key={type}>
+                                            {message}
+                                        </p>
+                                    ))
+                                    : null;
+                            }}
+                        />
+                    </label>
+                </div>
 
-            <div className="mb-2">
-                <label htmlFor="stock" className="text-dark">
-                    Stock:
-                    <input
-                        id="stock"
-                        type="number"
-                        className="m-2 px-4 py-2 border border-gray-300 rounded"
-                        {...register("stock", { required: "This input is required." })}
-                    />
-                    <ErrorMessage
-                        errors={errors}
-                        name="stock"
-                        render={({ messages }) => {
-                            return messages
-                                ? Object.entries(messages).map(([type, message]) => (
-                                      <p className="text-red-500" key={type}>
-                                          {message}
-                                      </p>
-                                  ))
-                                : null;
-                        }}
-                    />
-                </label>
-            </div>
+                <div className="mb-2 w-full">
+                    <label htmlFor="stock" className="text-dark">
+                        Stock:
+                        <input
+                            id="stock"
+                            type="number"
+                            className="m-2 px-4 py-2 border border-gray-300 rounded"
+                            {...register("stock", { required: "This input is required." })}
+                        />
+                        <ErrorMessage
+                            errors={errors}
+                            name="stock"
+                            render={({ messages }) => {
+                                return messages
+                                    ? Object.entries(messages).map(([type, message]) => (
+                                        <p className="text-red-500" key={type}>
+                                            {message}
+                                        </p>
+                                    ))
+                                    : null;
+                            }}
+                        />
+                    </label>
+                </div>
 
-            <div className="mb-2">
-                <label htmlFor="brand" className="text-dark">
-                    Brand:
-                    <input
-                        id="brand"
-                        type="number"
-                        className="m-2 px-4 py-2 border border-gray-300 rounded"
-                        {...register("brand", { required: "This input is required." })}
-                    />
-                    <ErrorMessage
-                        errors={errors}
-                        name="brand"
-                        render={({ messages }) => {
-                            return messages
-                                ? Object.entries(messages).map(([type, message]) => (
-                                      <p className="text-red-500" key={type}>
-                                          {message}
-                                      </p>
-                                  ))
-                                : null;
-                        }}
-                    />
-                </label>
-            </div>
+                <div className="mb-2 w-full">
+                    <label htmlFor="brand" className="text-dark">
+                        Brand:
+                        <input
+                            id="brand"
+                            type="number"
+                            className="m-2 px-4 py-2 border border-gray-300 rounded"
+                            {...register("brand", { required: "This input is required." })}
+                        />
+                        <ErrorMessage
+                            errors={errors}
+                            name="brand"
+                            render={({ messages }) => {
+                                return messages
+                                    ? Object.entries(messages).map(([type, message]) => (
+                                        <p className="text-red-500" key={type}>
+                                            {message}
+                                        </p>
+                                    ))
+                                    : null;
+                            }}
+                        />
+                    </label>
+                </div>
 
-            <div className="mb-2">
-                <label htmlFor="category" className="text-dark">
-                    Category:
-                    <input
-                        id="category"
-                        type="number"
-                        className="m-2 px-4 py-2 border border-gray-300 rounded"
-                        {...register("category", { required: "This input is required." })}
-                    />
-                    <ErrorMessage
-                        errors={errors}
-                        name="category"
-                        render={({ messages }) => {
-                            return messages
-                                ? Object.entries(messages).map(([type, message]) => (
-                                      <p className="text-red-500" key={type}>
-                                          {message}
-                                      </p>
-                                  ))
-                                : null;
-                        }}
-                    />
-                </label>
-            </div>
+                <div className="mb-2 w-full">
+                    <label htmlFor="category" className="text-dark">
+                        Category:
+                        <input
+                            id="category"
+                            type="number"
+                            className="m-2 px-4 py-2 border border-gray-300 rounded"
+                            {...register("category", { required: "This input is required." })}
+                        />
+                        <ErrorMessage
+                            errors={errors}
+                            name="category"
+                            render={({ messages }) => {
+                                return messages
+                                    ? Object.entries(messages).map(([type, message]) => (
+                                        <p className="text-red-500" key={type}>
+                                            {message}
+                                        </p>
+                                    ))
+                                    : null;
+                            }}
+                        />
+                    </label>
+                </div>
 
-            <div className="mb-2">
-                <label htmlFor="author" className="text-dark">
-                    Author:
-                    <input
-                        id="author"
-                        type="text"
-                        className="m-2 px-4 py-2 border border-gray-300 rounded"
-                        {...register("author", { required: "This input is required." })}
-                    />
-                    <ErrorMessage
-                        errors={errors}
-                        name="author"
-                        render={({ messages }) => {
-                            return messages
-                                ? Object.entries(messages).map(([type, message]) => (
-                                      <p className="text-red-500" key={type}>
-                                          {message}
-                                      </p>
-                                  ))
-                                : null;
-                        }}
-                    />
-                </label>
-            </div>
+                <div className="mb-2 w-full">
+                    <label htmlFor="author" className="text-dark">
+                        Author:
+                        <input
+                            id="author"
+                            type="text"
+                            className="m-2 px-4 py-2 border border-gray-300 rounded"
+                            {...register("author", { required: "This input is required." })}
+                        />
+                        <ErrorMessage
+                            errors={errors}
+                            name="author"
+                            render={({ messages }) => {
+                                return messages
+                                    ? Object.entries(messages).map(([type, message]) => (
+                                        <p className="text-red-500" key={type}>
+                                            {message}
+                                        </p>
+                                    ))
+                                    : null;
+                            }}
+                        />
+                    </label>
+                </div>
 
-            <div className="mb-2">
-                <label htmlFor="difficulty" className="text-dark">
-                    Difficulty:
-                    <input
-                        id="difficulty"
-                        type="text"
-                        className="m-2 px-4 py-2 border border-gray-300 rounded"
-                        {...register("difficulty", { required: "This input is required." })}
-                    />
-                    <ErrorMessage
-                        errors={errors}
-                        name="difficulty"
-                        render={({ messages }) => {
-                            return messages
-                                ? Object.entries(messages).map(([type, message]) => (
-                                      <p className="text-red-500" key={type}>
-                                          {message}
-                                      </p>
-                                  ))
-                                : null;
-                        }}
-                    />
-                </label>
-            </div>
+                <div className="mb-2 w-full">
+                    <label htmlFor="difficulty" className="text-dark">
+                        Difficulty:
+                        <input
+                            id="difficulty"
+                            type="text"
+                            className="m-2 px-4 py-2 border border-gray-300 rounded"
+                            {...register("difficulty", { required: "This input is required." })}
+                        />
+                        <ErrorMessage
+                            errors={errors}
+                            name="difficulty"
+                            render={({ messages }) => {
+                                return messages
+                                    ? Object.entries(messages).map(([type, message]) => (
+                                        <p className="text-red-500" key={type}>
+                                            {message}
+                                        </p>
+                                    ))
+                                    : null;
+                            }}
+                        />
+                    </label>
+                </div>
 
-            <div className="mb-2">
-                <label htmlFor="launchDate" className="text-dark">
-                    Launch Date:
-                    <input
-                        id="launchDate"
-                        type="text"
-                        className="m-2 px-4 py-2 border border-gray-300 rounded"
-                        {...register("launchDate", { required: "This input is required." })}
-                    />
-                    <ErrorMessage
-                        errors={errors}
-                        name="launchDate"
-                        render={({ messages }) => {
-                            return messages
-                                ? Object.entries(messages).map(([type, message]) => (
-                                      <p className="text-red-500" key={type}>
-                                          {message}
-                                      </p>
-                                  ))
-                                : null;
-                        }}
-                    />
-                </label>
-            </div>
+                <div className="mb-2 w-full">
+                    <label htmlFor="launchDate" className="text-dark">
+                        Launch Date:
+                        <input
+                            id="launchDate"
+                            type="text"
+                            className="m-2 px-4 py-2 border border-gray-300 rounded"
+                            {...register("launchDate", { required: "This input is required." })}
+                        />
+                        <ErrorMessage
+                            errors={errors}
+                            name="launchDate"
+                            render={({ messages }) => {
+                                return messages
+                                    ? Object.entries(messages).map(([type, message]) => (
+                                        <p className="text-red-500" key={type}>
+                                            {message}
+                                        </p>
+                                    ))
+                                    : null;
+                            }}
+                        />
+                    </label>
+                </div>
 
-            <div className="mb-2">
-                <label htmlFor="duration" className="text-dark">
-                    Duration:
-                    <input
-                        id="duration"
-                        type="number"
-                        className="m-2 px-4 py-2 border border-gray-300 rounded"
-                        {...register("duration", { required: "This input is required." })}
-                    />
-                    <ErrorMessage
-                        errors={errors}
-                        name="duration"
-                        render={({ messages }) => {
-                            return messages
-                                ? Object.entries(messages).map(([type, message]) => (
-                                      <p className="text-red-500" key={type}>
-                                          {message}
-                                      </p>
-                                  ))
-                                : null;
-                        }}
-                    />
-                </label>
-            </div>
+                <div className="mb-2 w-full">
+                    <label htmlFor="duration" className="text-dark">
+                        Duration:
+                        <input
+                            id="duration"
+                            type="number"
+                            className="m-2 px-4 py-2 border border-gray-300 rounded"
+                            {...register("duration", { required: "This input is required." })}
+                        />
+                        <ErrorMessage
+                            errors={errors}
+                            name="duration"
+                            render={({ messages }) => {
+                                return messages
+                                    ? Object.entries(messages).map(([type, message]) => (
+                                        <p className="text-red-500" key={type}>
+                                            {message}
+                                        </p>
+                                    ))
+                                    : null;
+                            }}
+                        />
+                    </label>
+                </div>
 
-            <div className="mb-2">
-                <label htmlFor="minPlayers" className="text-dark">
-                    Min Players:
-                    <input
-                        id="minPlayers"
-                        type="number"
-                        className="m-2 px-4 py-2 border border-gray-300 rounded"
-                        {...register("minPlayers", { required: "This input is required." })}
-                    />
-                    <ErrorMessage
-                        errors={errors}
-                        name="minPlayers"
-                        render={({ messages }) => {
-                            return messages
-                                ? Object.entries(messages).map(([type, message]) => (
-                                      <p className="text-red-500" key={type}>
-                                          {message}
-                                      </p>
-                                  ))
-                                : null;
-                        }}
-                    />
-                </label>
-            </div>
+                <div className="mb-2 w-full">
+                    <label htmlFor="minPlayers" className="text-dark">
+                        Min Players:
+                        <input
+                            id="minPlayers"
+                            type="number"
+                            className="m-2 px-4 py-2 border border-gray-300 rounded"
+                            {...register("minPlayers", { required: "This input is required." })}
+                        />
+                        <ErrorMessage
+                            errors={errors}
+                            name="minPlayers"
+                            render={({ messages }) => {
+                                return messages
+                                    ? Object.entries(messages).map(([type, message]) => (
+                                        <p className="text-red-500" key={type}>
+                                            {message}
+                                        </p>
+                                    ))
+                                    : null;
+                            }}
+                        />
+                    </label>
+                </div>
 
-            <div className="mb-2">
-                <label htmlFor="maxPlayers" className="text-dark">
-                    Max Players:
-                    <input
-                        id="maxPlayers"
-                        type="number"
-                        className="m-2 px-4 py-2 border border-gray-300 rounded"
-                        {...register("maxPlayers", { required: "This input is required." })}
-                    />
-                    <ErrorMessage
-                        errors={errors}
-                        name="maxPlayers"
-                        render={({ messages }) => {
-                            return messages
-                                ? Object.entries(messages).map(([type, message]) => (
-                                      <p className="text-red-500" key={type}>
-                                          {message}
-                                      </p>
-                                  ))
-                                : null;
-                        }}
-                    />
-                </label>
+                <div className="mb-2 w-full">
+                    <label htmlFor="maxPlayers" className="text-dark">
+                        Max Players:
+                        <input
+                            id="maxPlayers"
+                            type="number"
+                            className="m-2 px-4 py-2 border border-gray-300 rounded"
+                            {...register("maxPlayers", { required: "This input is required." })}
+                        />
+                        <ErrorMessage
+                            errors={errors}
+                            name="maxPlayers"
+                            render={({ messages }) => {
+                                return messages
+                                    ? Object.entries(messages).map(([type, message]) => (
+                                        <p className="text-red-500" key={type}>
+                                            {message}
+                                        </p>
+                                    ))
+                                    : null;
+                            }}
+                        />
+                    </label>
+                </div>
+
             </div>
 
             {operation === "create" ? (

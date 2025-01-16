@@ -11,8 +11,6 @@ function Footer() {
               <li>Las fichas</li>
               <li>Gastos de envío</li>
               <li>Devoluciones</li>
-              <li>Plan Amigo</li>
-              <li>Canjear Tarjezaca</li>
               <li>Preguntas Frecuentes</li>
               <li>Pago a plazos</li>
             </ul>
