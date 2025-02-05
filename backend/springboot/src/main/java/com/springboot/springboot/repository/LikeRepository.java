@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Optional;
 
 public interface LikeRepository extends JpaRepository<Like, Long> {
-    @Query("SELECT l FROM Like l WHERE :user=l.user_id AND :product=l.product_id")
+    @Query("SELECT l FROM Like l WHERE :user=l.user AND :product=l.product")
     Optional<Like> checkLike(
             @Param("user") Long user,
             @Param("product") Long product

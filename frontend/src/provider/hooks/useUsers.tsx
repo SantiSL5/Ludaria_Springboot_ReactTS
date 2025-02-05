@@ -10,7 +10,6 @@ export function useUsers() {
     const [user, setUser]: any = useState(undefined);
     const [users, setUsers]: any = useState(undefined);
     const [isAdmin, setIsAdmin]: any = useState(undefined);
-    const [isWorker, setIsWorker]: any = useState(undefined);
     const [loading, setLoading]: any = useState(true);
     const [token, setToken]: any = useState(consume(queryConsumer.apiJwt, jwtQueries.getToken));
 
@@ -171,5 +170,5 @@ export function useUsers() {
     })
 
 
-    return { user, users, token, isAdmin, isWorker, loading, setIsAdmin, setIsWorker, register, login, logout, refreshToken, getAllUsers, createUser, updateUser, deleteUser, deleteManyUsers };
+    return { user, users, token, isAdmin, loading, setIsAdmin, register, login, logout, refreshToken, getAllUsers, createUser, updateUser, deleteUser, deleteManyUsers };
 }

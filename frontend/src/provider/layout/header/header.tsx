@@ -67,6 +67,9 @@ const Header = () => {
                     {isAdmin ? <NavbarLinkActive href="/admin">ADMIN</NavbarLinkActive> : <></>}
                 </Navbar.Collapse>
             </Navbar>
+            <div className="bg-black text-white w-full text-center py-2 text-sm">
+                <span>Envíos 24 horas estimadas en península y gratis comprando un Juego Ludaria de más de 10 €</span>
+            </div>
         </> 
     )
 }

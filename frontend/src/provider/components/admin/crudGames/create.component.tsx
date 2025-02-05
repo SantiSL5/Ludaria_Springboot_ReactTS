@@ -113,30 +113,6 @@ const CreateUpdateGame = ({
                 </div>
 
                 <div className="mb-2 w-full">
-                    <label htmlFor="description" className="text-dark">
-                        Description:
-                        <textarea
-                            id="description"
-                            className="ml-2 border border-gray-300 rounded"
-                            {...register("description", { required: "This input is required." })}
-                        />
-                        <ErrorMessage
-                            errors={errors}
-                            name="description"
-                            render={({ messages }) => {
-                                return messages
-                                    ? Object.entries(messages).map(([type, message]) => (
-                                        <p className="text-red-500" key={type}>
-                                            {message}
-                                        </p>
-                                    ))
-                                    : null;
-                            }}
-                        />
-                    </label>
-                </div>
-
-                <div className="mb-2 w-full">
                     <label htmlFor="price" className="text-dark">
                         Price:
                         <input
@@ -434,6 +410,30 @@ const CreateUpdateGame = ({
                             }}
                         />
                     </label>
+                </div>
+
+                <div className="mb-2 w-full">
+                    <label htmlFor="description" className="text-dark">
+                        Description:
+                    </label>
+                    <textarea
+                            id="description"
+                            className="ml-2 border border-gray-300 rounded"
+                            {...register("description", { required: "This input is required." })}
+                        />
+                        <ErrorMessage
+                            errors={errors}
+                            name="description"
+                            render={({ messages }) => {
+                                return messages
+                                    ? Object.entries(messages).map(([type, message]) => (
+                                        <p className="text-red-500" key={type}>
+                                            {message}
+                                        </p>
+                                    ))
+                                    : null;
+                            }}
+                    />
                 </div>
 
             </div>
