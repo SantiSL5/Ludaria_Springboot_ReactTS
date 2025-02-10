@@ -38,6 +38,12 @@ import java.util.Optional;
 public class UserService {
 
     @Autowired
+    UserRepository userRepository;
+
+    @Autowired
+    BlacklistTokenRepository BlacklistTokenRepository;
+
+    @Autowired
     private PasswordEncoder encoder;
 
     @Autowired
@@ -45,12 +51,6 @@ public class UserService {
 
     @Autowired
     private JwtUtils jwtUtils;
-
-    @Autowired
-    private BlacklistTokenRepository BlacklistTokenRepository;
-
-    @Autowired
-    UserRepository userRepository;
 
     private static final Logger logger = LoggerFactory.getLogger(UserService.class);
 
@@ -66,6 +66,11 @@ public class UserService {
         catch (Exception e) {
             throw new Exception(e.getMessage());
         }
+    }
+
+    public boolean isAuthenticated() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        return authentication != null && authentication.isAuthenticated() && !(authentication.getPrincipal() instanceof String && authentication.getPrincipal().equals("anonymousUser"));
     }
 
     public ResponseEntity profile() {

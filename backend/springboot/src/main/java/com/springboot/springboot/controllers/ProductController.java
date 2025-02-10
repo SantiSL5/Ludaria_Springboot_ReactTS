@@ -31,7 +31,7 @@ public class ProductController {
 
 
     @GetMapping("/product")
-    public ResponseEntity<?> getAllProducts(@RequestParam(value = "limit", required = false, defaultValue = "0") String limit,
+    public ResponseEntity<?> getAllProducts(@RequestParam(value = "limit", required = false) String limit,
                                             @RequestParam(value = "offset", required = false) String offset,
                                             @RequestParam(value = "type", required = false) String type,
                                             @RequestParam(value = "category", required = false) String category,

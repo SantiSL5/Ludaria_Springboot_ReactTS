@@ -2,7 +2,7 @@ import DataTable from 'react-data-table-component';
 import React from "react";
 
 
-const List = ({ list, deleteCategory, deleteManyCategories, changeForm }: any) => {
+const List = ({ list, deleteCategory, deleteManyCategories }: any) => {
     const [selectedRows, setSelectedRows]: any = React.useState(false);
     const [toggledClearRows] = React.useState(false);
 
@@ -53,6 +53,11 @@ const List = ({ list, deleteCategory, deleteManyCategories, changeForm }: any) =
         {
             name: 'Type',
             selector: (row: any) => row.type,
+            sortable: true
+        },
+        {
+            name: 'Likes',
+            selector: (row: any) => row.likes,
             sortable: true
         },
         {

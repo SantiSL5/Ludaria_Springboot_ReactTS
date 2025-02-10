@@ -19,7 +19,7 @@ const LoginComponent = ({ login }: any) => {
   };
 
   return (
-    <div className="flex justify-center items-center min-h-screen bg-white">
+    <div className="flex justify-center items-center my-20 bg-white">
       <div className="w-full max-w-md p-8 space-y-6 border rounded-md shadow-md">
         <h2
           className="text-3xl font-bold text-center"

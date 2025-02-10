@@ -21,16 +21,13 @@ public class AccessoryService {
     private static final Logger logger = LoggerFactory.getLogger(Category.class);
 
     @Autowired
+    AccessoryRepository accessoryRepository;
+
     BrandService brandService;
 
-    @Autowired
     GameService gameService;
 
-    @Autowired
     CategoryService categoryService;
-
-    @Autowired
-    AccessoryRepository accessoryRepository;
 
     public Accessory getAccessory(String id) throws Exception {
         try {

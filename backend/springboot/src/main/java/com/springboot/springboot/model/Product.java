@@ -50,6 +50,12 @@ public class Product {
     @Column(name = "updated_at")
     private Timestamp updated_at;
 
+    @Transient
+    private Long likes;
+
+    @Transient
+    private Boolean liked;
+
     public Product() {
     }
 
@@ -147,5 +153,21 @@ public class Product {
 
     public void setCategory(Category category) {
         this.category = category;
+    }
+
+    public Long getLikes() {
+        return likes;
+    }
+
+    public void setLikes(Long likes) {
+        this.likes = likes;
+    }
+
+    public Boolean getLiked() {
+        return liked;
+    }
+
+    public void setLiked(Boolean liked) {
+        this.liked = liked;
     }
 }

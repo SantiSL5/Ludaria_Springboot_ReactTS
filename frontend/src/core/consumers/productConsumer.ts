@@ -9,7 +9,6 @@ const productConsumer: any = {
         })
     },
     getAll: (params?: { [key: string]: any }) => {
-        console.log(params)
         return Api({
             method: "get",
             url: secrets.SPRINGBOOT_APP_URL + "/product",

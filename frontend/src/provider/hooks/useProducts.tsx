@@ -111,7 +111,7 @@ export function useProducts() {
         })
     })
 
-    return { product, products, pages, loading, setLoading, getProduct, getAllProducts, getProductsFilters, getAllPuzzles, getAllGames, getAllAccessories, deleteProduct, deleteManyProducts };
+    return { product, products, pages, loading, setLoading, getProduct, getAllProducts, getProductsFilters, getAllPuzzles, getAllGames, getAllAccessories, deleteProduct, deleteManyProducts};
 
 }
 

@@ -7,6 +7,7 @@ const queryConsumer: any = {
     apiGame: "ApiGame",
     apiPuzzle: "ApiPuzzle",
     apiAccessory: "ApiAccessory",
+    apiLike: "ApiLike",
 }
 
 export default queryConsumer;

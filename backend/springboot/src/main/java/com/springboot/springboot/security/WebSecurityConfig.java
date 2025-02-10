@@ -19,7 +19,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
-import static org.springframework.security.web.util.matcher.AntPathRequestMatcher.antMatcher;
+import org.springframework.security.config.http.SessionCreationPolicy;
 
 import java.util.Arrays;
 
@@ -61,12 +61,15 @@ public class WebSecurityConfig {
             .requestMatchers("/api/admin/**").hasRole("ADMIN")
             .requestMatchers("/api/client/**").authenticated()
             .requestMatchers("/api/user/profile").authenticated()
-            .requestMatchers("/api/user/logout").permitAll()
+            .requestMatchers("/api/user/logout").authenticated()
             .requestMatchers("/api/user/**").permitAll()
             .requestMatchers("/api/**").permitAll()
             .and()
             .authenticationProvider(authenticationProvider())
-            .addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
+            .addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class)
+            .sessionManagement(session -> session
+                    .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+            );
 
     return http.build();
   }

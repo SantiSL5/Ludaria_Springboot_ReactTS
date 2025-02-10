@@ -23,6 +23,9 @@ public class ProductService {
     @Autowired
     private ProductRepository productRepository;
 
+    @Autowired
+    private UserService userService;
+
     private BigDecimal parseBigDecimal(String value) {
         return value == null ? null : new BigDecimal(value);
     }
@@ -31,34 +34,77 @@ public class ProductService {
 
     public ResponseEntity<?> getProducts(String limit, String offset, String type, String category, String brand, String minPrice, String maxPrice) {
         try {
-            Pageable pageable = null;
-            if (limit != null && offset != null) {
-                pageable = PageRequest.of(Integer.parseInt(offset), Integer.parseInt(limit));
-            }
+            ProductType typeFilter = type == null ? null : ProductType.valueOf(type);
+            Long categoryFilter = category == null ? null : Long.parseLong(category);
+            Long brandFilter = brand == null ? null : Long.parseLong(brand);
+            BigDecimal minPriceFilter = minPrice == null ? null : parseBigDecimal(minPrice);
+            BigDecimal maxPriceFilter = maxPrice == null ? null : parseBigDecimal(maxPrice);
 
-            Page<Product> productPage = null;
-            if (pageable != null) {
-                productPage = productRepository.findProductsByFiltersPag(pageable,
-                        type == null ? null : ProductType.valueOf(type),
-                        category == null ? null : Long.parseLong(category),
-                        brand == null ? null : Long.parseLong(brand),
-                        minPrice == null ? null : parseBigDecimal(minPrice),
-                        maxPrice == null ? null : parseBigDecimal(maxPrice)
+            if (limit != null && offset != null) {
+                Pageable pageable = PageRequest.of(Integer.parseInt(offset), Integer.parseInt(limit));
+                Page<Object[]> productPage;
+                if (userService.isAuthenticated()) {
+                    User user = userService.token_user();
+                    productPage = productRepository.findProductsByFiltersPagAuth(
+                            pageable,
+                            typeFilter,
+                            categoryFilter,
+                            brandFilter,
+                            minPriceFilter,
+                            maxPriceFilter,
+                            user.getId()
+                    );
+                    List<Product> products = productPage.getContent().stream()
+                            .map(result -> {
+                                Product product = (Product) result[0];
+                                Long likes = (Long) result[1];
+                                Boolean liked = (result.length > 2) ? (Boolean) result[2] : false;;
+                                product.setLikes(likes);
+                                product.setLiked(liked);
+                                return product;
+                            })
+                            .toList();
+                    ProductsResponse response = new ProductsResponse(productPage.getTotalPages(), products);
+                    return new ResponseEntity<>(response, HttpStatus.OK);
+                } else {
+                    productPage = productRepository.findProductsByFiltersPag(
+                            pageable,
+                            typeFilter,
+                            categoryFilter,
+                            brandFilter,
+                            minPriceFilter,
+                            maxPriceFilter
+                    );
+                    List<Product> products = productPage.getContent().stream()
+                            .map(result -> {
+                                Product product = (Product) result[0];
+                                Long likes = (Long) result[1];
+                                product.setLikes(likes);
+                                return product;
+                            })
+                            .toList();
+                    ProductsResponse response = new ProductsResponse(productPage.getTotalPages(), products);
+                    return new ResponseEntity<>(response, HttpStatus.OK);
+                }
+            }else {
+                List<Object[]> rawProducts = productRepository.findProductsByFilters(
+                        typeFilter,
+                        categoryFilter,
+                        brandFilter,
+                        minPriceFilter,
+                        maxPriceFilter
                 );
-            } else {
-                List<Product> products = productRepository.findProductsByFilters(
-                        type == null ? null : ProductType.valueOf(type),
-                        category == null ? null : Long.parseLong(category),
-                        brand == null ? null : Long.parseLong(brand),
-                        minPrice == null ? null : parseBigDecimal(minPrice),
-                        maxPrice == null ? null : parseBigDecimal(maxPrice)
-                );
+                List<Product> products = rawProducts.stream()
+                        .map(result -> {
+                            Product product = (Product) result[0];
+                            Long likes = (Long) result[1];
+                            product.setLikes(likes);
+                            return product;
+                        })
+                        .toList();
                 return new ResponseEntity<>(products, HttpStatus.OK);
             }
 
-            List<Product> products = productPage.getContent();
-            ProductsResponse response = new ProductsResponse(productPage.getTotalPages(), products);
-            return new ResponseEntity<>(response, HttpStatus.OK);
         } catch (Exception e) {
             logger.error("Error getting products: {}", e.getMessage());
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);

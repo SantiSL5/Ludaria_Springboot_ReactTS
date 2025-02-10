@@ -22,13 +22,11 @@ public class GameService {
     private static final Logger logger = LoggerFactory.getLogger(Category.class);
 
     @Autowired
+    GameRepository gameRepository;
+
     BrandService brandService;
 
-    @Autowired
     CategoryService categoryService;
-
-    @Autowired
-    GameRepository gameRepository;
 
     public Game getGame(String id) throws Exception {
         try {

@@ -6,8 +6,10 @@ import { useEffect, useState } from 'react';
 import PaginationComponent from '../../components/shop/paginationComponent';
 import { useCategories } from '../../hooks/useCategories';
 import { useBrands } from '../../hooks/useBrands';
+import { useLikes } from '../../hooks/useLike';
 
 const ShopPage = () => {
+    const { setLike } = useLikes();
     const { products, getProductsFilters, pages } = useProducts();
     const { categories, getAllCategories } = useCategories();
     const { brands, getAllBrands } = useBrands();
@@ -21,7 +23,12 @@ const ShopPage = () => {
         maxPrice: null,
     });
 
-    if (!products) getProductsFilters(12,currentPage-1, filters);
+    useEffect(() => {
+        getProductsFilters(12,currentPage-1, filters);
+    }, [filters,currentPage]);
+
+
+    // if (!products) getProductsFilters(12,currentPage-1, filters);
     if (!categories) getAllCategories();
     if (!brands) getAllBrands();
 
@@ -36,6 +43,15 @@ const ShopPage = () => {
         getProductsFilters(12, 0, newFilters);
     };
 
+    const handleLike = async (product: number) => {
+        try {
+            await setLike(product);
+            getProductsFilters(12,currentPage-1, filters);
+        } catch (e){
+            console.log(e);
+        }
+    };
+
     return (
     <div className="container mx-auto p-4">
         <div className="flex flex-col lg:flex-row gap-6">
@@ -44,7 +60,7 @@ const ShopPage = () => {
             </aside>
 
             <div className="flex-1">
-                {products ? (<ListComponent items={products} />) : <Spinner />}
+                {products ? (<ListComponent items={products} onLike={handleLike} />) : <Spinner />}
                 {products ? (<PaginationComponent currentPage={currentPage} totalPages={pages} onPageChange={handlePageChange} />) : <Spinner />}
             </div>
         </div>

@@ -23,10 +23,8 @@ public class PuzzleService {
     @Autowired
     PuzzleRepository puzzleRepository;
 
-    @Autowired
     BrandService brandService;
 
-    @Autowired
     CategoryService categoryService;
     
     public Puzzle getPuzzle(String id) throws Exception {
