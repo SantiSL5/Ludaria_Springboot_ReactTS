@@ -25,7 +25,7 @@ const ShopPage = () => {
 
     useEffect(() => {
         getProductsFilters(12,currentPage-1, filters);
-    }, [filters,currentPage]);
+    }, [filters, currentPage]);
 
 
     // if (!products) getProductsFilters(12,currentPage-1, filters);

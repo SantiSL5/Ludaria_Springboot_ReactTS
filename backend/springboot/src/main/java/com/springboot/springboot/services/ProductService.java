@@ -1,6 +1,7 @@
 package com.springboot.springboot.services;
 
 import com.springboot.springboot.model.*;
+import com.springboot.springboot.repository.LikeRepository;
 import com.springboot.springboot.repository.ProductRepository;
 import com.springboot.springboot.resources.ProductsResponse;
 import org.slf4j.Logger;
@@ -22,6 +23,9 @@ import java.math.BigDecimal;
 public class ProductService {
     @Autowired
     private ProductRepository productRepository;
+
+    @Autowired
+    private LikeRepository likeRepository;
 
     @Autowired
     private UserService userService;
@@ -120,15 +124,31 @@ public class ProductService {
     }
 
     public Product getProduct(Long id) {
-        Optional<Product> optional = productRepository.findById(id);
-        return optional.orElse(null);
+        try {
+            Product product= productRepository.findById(id).orElse(null);
+            if (product != null) {
+                if (userService.isAuthenticated()) {
+                    User user = userService.token_user();
+                    product.setLikes(likeRepository.countLikesByProduct(product.getId()));
+                    product.setLiked(likeRepository.checkLike(user.getId(), product.getId()).isPresent());
+                }else {
+                    product.setLikes(likeRepository.countLikesByProduct(product.getId()));
+                }
+                return product;
+            }else {
+                return null;
+            }
+        } catch (Exception e) {
+            logger.error("Error getting product: {}", e.getMessage());
+        }
+        return null;
     }
 
     public void deleteProduct(Long id) {
         try {
             productRepository.deleteById(id);
         } catch (Exception e) {
-            logger.error("Error deleting category: {}", e.getMessage());
+            logger.error("Error deleting product: {}", e.getMessage());
         }
     }
 

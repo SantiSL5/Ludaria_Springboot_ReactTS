@@ -10,8 +10,6 @@ const ListComponent: React.FC<ListProps> = ({ items, onLike }) => {
 
     const navigate = useNavigate();
 
-    const [updatedItems, setUpdatedItems] = useState(items);
-
     const detailsClick = ( id : number) => {
         navigate(`/shop/details/${id}`);
     };
@@ -20,13 +18,9 @@ const ListComponent: React.FC<ListProps> = ({ items, onLike }) => {
         onLike(product);
     }
 
-    useEffect(() => {
-        setUpdatedItems(items);
-    }, [items]);
-
     return (
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:lg:grid-cols-4">
-            {updatedItems.map((item:any) => (
+            {items.map((item:any) => (
                 <div 
                     key={item.id}
                     className="border p-4 rounded-lg hover:shadow-md"

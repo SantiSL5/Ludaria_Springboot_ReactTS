@@ -17,5 +17,11 @@ public interface LikeRepository extends JpaRepository<Like, Long> {
             @Param("user") Long user,
             @Param("product") Long product
     );
+
+    @Query("SELECT COUNT(l) FROM Like l WHERE l.product.id = :productId")
+    Long countLikesByProduct(
+            @Param("productId") Long productId
+    );
+
 }
 
