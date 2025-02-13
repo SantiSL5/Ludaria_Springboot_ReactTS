@@ -15,7 +15,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.math.BigDecimal;
@@ -65,8 +64,12 @@ public class ProductService {
                     List<Product> products = productPage.getContent().stream()
                             .map(result -> {
                                 Product product = (Product) result[0];
-                                Long likes = (Long) result[1];
-                                Boolean liked = (result.length > 2) ? (Boolean) result[2] : false;;
+                                Long numComments = (Long) result[1];
+                                Double rating = (Double) result[2];
+                                Long likes = (Long) result[3];
+                                Boolean liked = (result.length > 4) ? (Boolean) result[4] : false;
+                                product.setNumComments(numComments);
+                                product.setRating(rating);
                                 product.setLikes(likes);
                                 product.setLiked(liked);
                                 return product;
@@ -86,7 +89,11 @@ public class ProductService {
                     List<Product> products = productPage.getContent().stream()
                             .map(result -> {
                                 Product product = (Product) result[0];
-                                Long likes = (Long) result[1];
+                                Long numComments = (Long) result[1];
+                                Double rating = (Double) result[2];
+                                Long likes = (Long) result[3];
+                                product.setNumComments(numComments);
+                                product.setRating(rating);
                                 product.setLikes(likes);
                                 return product;
                             })
@@ -105,7 +112,11 @@ public class ProductService {
                 List<Product> products = rawProducts.stream()
                         .map(result -> {
                             Product product = (Product) result[0];
-                            Long likes = (Long) result[1];
+                            Long numComments = (Long) result[1];
+                            Double rating = (Double) result[2];
+                            Long likes = (Long) result[3];
+                            product.setNumComments(numComments);
+                            product.setRating(rating);
                             product.setLikes(likes);
                             return product;
                         })
@@ -141,6 +152,8 @@ public class ProductService {
                     comment.ifPresent(product::setComment);
                 }else {
                     product.setLikes(likeRepository.countLikesByProduct(product.getId()));
+                    product.setNumComments(commentRepository.numComments(product.getId()));
+                    product.setRating(commentRepository.productRating(product.getId()));
                 }
                 return product;
             }else {

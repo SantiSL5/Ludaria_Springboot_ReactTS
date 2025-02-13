@@ -64,7 +64,7 @@ public class Product {
     private Long numComments;
 
     @Transient
-    private Float rating;
+    private Double rating;
 
     public Product() {
     }
@@ -197,11 +197,11 @@ public class Product {
         this.numComments = numComments;
     }
 
-    public Float getRating() {
+    public Double getRating() {
         return rating;
     }
 
-    public void setRating(Float rating) {
+    public void setRating(Double rating) {
         this.rating = rating;
     }
 }

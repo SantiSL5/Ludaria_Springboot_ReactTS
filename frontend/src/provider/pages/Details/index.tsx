@@ -60,7 +60,7 @@ const DetailsPage = () => {
       <div className="mb-4">
           {product ? (<DetailsComponent product={product} onLike={handleLike} onNewComment={handleNewComment} onDeleteComment={handleDeleteComment} />) : <Spinner />}
           {comments ? (<CommentsListComponent comments={comments} onDeleteComment={handleDeleteComment}/>) : <Spinner />}
-          {comments ? (<PaginationComponent currentPage={currentPage} totalPages={pages} onPageChange={handlePageChange} />) : <Spinner />}
+          {comments && pages > 0 ? (<PaginationComponent currentPage={currentPage} totalPages={pages} onPageChange={handlePageChange} />) : <Spinner />}
       </div>
     );
   };

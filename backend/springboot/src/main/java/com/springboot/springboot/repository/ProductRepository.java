@@ -2,7 +2,6 @@ package com.springboot.springboot.repository;
 
 import com.springboot.springboot.model.Product;
 import com.springboot.springboot.model.ProductType;
-import com.springboot.springboot.model.User;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -14,6 +13,8 @@ import java.util.List;
 
 public interface ProductRepository extends JpaRepository<Product, Long> {
     @Query( "SELECT p, " +
+            "(SELECT COUNT(c) FROM Comment c WHERE c.product.id = p.id) AS comments, " +
+            "(SELECT ROUND(AVG(c.rate), 1) FROM Comment c WHERE c.product.id = p.id) AS rating, " +
             "(SELECT COUNT(l) FROM Like l WHERE l.product.id = p.id) AS likes " +
             "FROM Product p " +
             "WHERE " +
@@ -30,6 +31,8 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
             @Param("maxPrice") BigDecimal maxPrice
     );
     @Query( "SELECT p, " +
+            "(SELECT COUNT(c) FROM Comment c WHERE c.product.id = p.id) AS comments, " +
+            "(SELECT ROUND(AVG(c.rate), 1) FROM Comment c WHERE c.product.id = p.id) AS rating, " +
             "(SELECT COUNT(l) FROM Like l WHERE l.product.id = p.id) AS likes " +
             "FROM Product p " +
             "WHERE " +
@@ -47,6 +50,8 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
             @Param("maxPrice") BigDecimal maxPrice
     );
     @Query( "SELECT p, " +
+            "(SELECT COUNT(c) FROM Comment c WHERE c.product.id = p.id) AS comments, " +
+            "(SELECT ROUND(AVG(c.rate), 1) FROM Comment c WHERE c.product.id = p.id) AS rating, " +
             "(SELECT COUNT(l) FROM Like l WHERE l.product.id = p.id) AS likes, " +
             "(SELECT COUNT(l) > 0 FROM Like l WHERE l.product.id = p.id AND l.user.id = :user) AS liked " +
             "FROM Product p " +

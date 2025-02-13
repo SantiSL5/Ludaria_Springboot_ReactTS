@@ -1,16 +1,12 @@
 package com.springboot.springboot.repository;
 
 import com.springboot.springboot.model.Comment;
-import com.springboot.springboot.model.Like;
-import com.springboot.springboot.model.ProductType;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
-import java.math.BigDecimal;
-import java.util.List;
 import java.util.Optional;
 
 public interface CommentRepository extends JpaRepository<Comment, Long> {
@@ -33,7 +29,7 @@ public interface CommentRepository extends JpaRepository<Comment, Long> {
     );
 
     @Query("SELECT ROUND(AVG(c.rate), 1) FROM Comment c WHERE c.product.id = :product")
-    Float productRating(
+    Double productRating(
             @Param("product") Long product
     );
 

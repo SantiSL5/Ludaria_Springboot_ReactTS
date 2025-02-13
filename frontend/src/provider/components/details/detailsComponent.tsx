@@ -1,10 +1,12 @@
 import Rating from "@mui/material/Rating";
 import DeleteIcon from '@mui/icons-material/Delete';
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useUsers } from "../../hooks/useUsers";
 import { toast } from "react-toastify";
 import dayjs from "dayjs";
 import { IconButton } from "@mui/material";
 import ChatBubbleOutlineIcon from '@mui/icons-material/ChatBubbleOutline';
+import InfoIcon from '@mui/icons-material/Info';
 
 
 interface DetailsProps {
@@ -16,6 +18,7 @@ interface DetailsProps {
 
 
 const DetailsComponent : React.FC<DetailsProps> = ({ product, onLike, onNewComment, onDeleteComment })=> {
+    const {user, isAdmin} = useUsers();
     const [comment, setComment] = useState("");
     const [rate, setRate]= useState(0);
     const maxLength = 280;
@@ -43,6 +46,11 @@ const DetailsComponent : React.FC<DetailsProps> = ({ product, onLike, onNewComme
             setRate(0);
         }
     };
+
+    useEffect(() => {
+    
+    }, [user, isAdmin]);
+    
 
     return (
       <div className="container mx-auto p-6">
@@ -101,54 +109,63 @@ const DetailsComponent : React.FC<DetailsProps> = ({ product, onLike, onNewComme
         </div>
         
         <div className="mt-6">
-            {product.comment ? (
+            {user ? (
+                product.comment ? (
                     <div>
                         <h2 className="text-2xl font-bold">Tu comentario</h2>
                         <div className="bg-gray-100 p-4 rounded-lg mt-4 relative">
                             <div className="absolute top-2 right-2">
                                 <IconButton color="error" aria-label="delete" onClick={deleteComment}>
-                                    <DeleteIcon/>
+                                    <DeleteIcon />
                                 </IconButton>
                             </div>
                             <div className="mt-2">
-                                <Rating defaultValue={product.comment.rate} readOnly/>
+                                <Rating defaultValue={product.comment.rate} readOnly />
                             </div>
                             <p className="text-lg ml-1">{product.comment.content}</p>
                             <p className="text-md ml-1 mt-3">{dayjs(product.comment.createdAt).format("DD/MM/YYYY HH:mm")}</p>
                         </div>
                     </div>
-            ) : (
-                <div>
-                    <h2 className="text-2xl font-bold">Deja tu comentario</h2>
-                    <div className="mt-6">
-                        <label htmlFor="rate" className="block text-lg font-semibold mb-2">
-                        Valoración
-                        </label>
-                        <Rating
-                            value={rate}
-                            onChange={(event, newValue:any) => {
-                                setRate(newValue);
-                            }}
-                        />
-                        <label htmlFor="content" className="block text-lg font-semibold mb-2">
-                        Comentario
-                        </label>
-                        <textarea
-                            id="content"
-                            name="content"
-                            rows={3}
-                            maxLength={maxLength}
-                            value={comment}
-                            onChange={handleInputChange}
-                            className="w-full border rounded-lg p-2"
-                            placeholder="Escribe tu comentario aquí..."
-                        ></textarea>
-                        <p className="text-right text-sm text-gray-500">
-                        {comment.length}/{maxLength}
-                        </p>
-                        <button onClick={handleComment} className="bg-blue-500 text-white py-2 px-4 rounded-lg mt-4 hover:bg-blue-600">Enviar comentario</button>
+                ) : (
+                    <div>
+                        <h2 className="text-2xl font-bold">Deja tu comentario</h2>
+                        <div className="mt-6">
+                            <label htmlFor="rate" className="block text-lg font-semibold mb-2">
+                                Valoración
+                            </label>
+                            <Rating
+                                value={rate}
+                                onChange={(event, newValue: any) => {
+                                    setRate(newValue);
+                                }}
+                            />
+                            <label htmlFor="content" className="block text-lg font-semibold mb-2">
+                                Comentario
+                            </label>
+                            <textarea
+                                id="content"
+                                name="content"
+                                rows={3}
+                                maxLength={maxLength}
+                                value={comment}
+                                onChange={handleInputChange}
+                                className="w-full border rounded-lg p-2"
+                                placeholder="Escribe tu comentario aquí..."
+                            ></textarea>
+                            <p className="text-right text-sm text-gray-500">
+                                {comment.length}/{maxLength}
+                            </p>
+                            <button
+                                onClick={handleComment}
+                                className="bg-blue-500 text-white py-2 px-4 rounded-lg mt-4 hover:bg-blue-600"
+                            >
+                                Enviar comentario
+                            </button>
+                        </div>
                     </div>
-                </div>
+                )
+            ) : (
+                <p className="text-red-600 mt-4 flex items-center"><InfoIcon />Debes loguearte para poder valorar los productos.</p>
             )}
         </div>
 

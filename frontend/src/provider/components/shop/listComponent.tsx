@@ -1,5 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
+import Rating from '@mui/material/Rating';
 
 interface ListProps {
     items: any[];
@@ -54,6 +55,10 @@ const ListComponent: React.FC<ListProps> = ({ items, onLike }) => {
                                 />
                             </svg>
                         </button>
+                    </div>
+                    <div className="flex items-center justify-between mt-2 text-sm text-gray-500">
+                            <p>{item.numComments || 0} Comentarios</p>
+                            <p className="flex items-center"><Rating size="small" defaultValue={item.rating} precision={0.1} readOnly />{item.rating ? item.rating.toFixed(1) : "N/A"}</p>
                     </div>
                 </div>
             ))}
