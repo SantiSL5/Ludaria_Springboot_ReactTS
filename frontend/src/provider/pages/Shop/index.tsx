@@ -3,7 +3,7 @@ import FilterComponent from '../../components/shop/filterComponent';
 import { useProducts } from '../../hooks/useProducts';
 import Spinner from '../../components/spinner/spinner.component';
 import { useEffect, useState } from 'react';
-import PaginationComponent from '../../components/shop/paginationComponent';
+import PaginationComponent from '../../components/generic/paginationComponent';
 import { useCategories } from '../../hooks/useCategories';
 import { useBrands } from '../../hooks/useBrands';
 import { useLikes } from '../../hooks/useLike';

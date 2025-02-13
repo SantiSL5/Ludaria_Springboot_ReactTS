@@ -8,6 +8,7 @@ import accessoryQueries from "./accessoryQueries";
 import jwtQueries from "./jwtQueries";
 import userQueries from "./userQueries";
 import likeQueries from "./likeQueries";
+import commentQueries from "./commentQueries";
 
 export {
     queryConsumer,
@@ -20,4 +21,5 @@ export {
     puzzleQueries,
     accessoryQueries,
     likeQueries,
+    commentQueries,
 };

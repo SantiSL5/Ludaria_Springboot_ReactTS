@@ -1,6 +1,7 @@
 package com.springboot.springboot.services;
 
 import com.springboot.springboot.model.*;
+import com.springboot.springboot.repository.CommentRepository;
 import com.springboot.springboot.repository.LikeRepository;
 import com.springboot.springboot.repository.ProductRepository;
 import com.springboot.springboot.resources.ProductsResponse;
@@ -26,6 +27,9 @@ public class ProductService {
 
     @Autowired
     private LikeRepository likeRepository;
+
+    @Autowired
+    private CommentRepository commentRepository;
 
     @Autowired
     private UserService userService;
@@ -131,6 +135,8 @@ public class ProductService {
                     User user = userService.token_user();
                     product.setLikes(likeRepository.countLikesByProduct(product.getId()));
                     product.setLiked(likeRepository.checkLike(user.getId(), product.getId()).isPresent());
+                    Optional<Comment> comment = commentRepository.checkComment(user.getId(), product.getId());
+                    comment.ifPresent(product::setComment);
                 }else {
                     product.setLikes(likeRepository.countLikesByProduct(product.getId()));
                 }

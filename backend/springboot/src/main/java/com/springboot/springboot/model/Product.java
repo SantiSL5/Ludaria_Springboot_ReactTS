@@ -1,5 +1,6 @@
 package com.springboot.springboot.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
@@ -55,6 +56,9 @@ public class Product {
 
     @Transient
     private Boolean liked;
+
+    @Transient
+    private Comment comment;
 
     public Product() {
     }
@@ -169,5 +173,13 @@ public class Product {
 
     public void setLiked(Boolean liked) {
         this.liked = liked;
+    }
+
+    public Comment getComment() {
+        return comment;
+    }
+
+    public void setComment(Comment comment) {
+        this.comment = comment;
     }
 }

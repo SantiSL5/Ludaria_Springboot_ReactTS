@@ -7,6 +7,7 @@ import accessoryConsumer from "./accesoryConsumer";
 import jwtConsumer from "./jwtConsumer";
 import userConsumer from "./userConsumer";
 import likeConsumer from "./likeConsumer";
+import commentConsumer from "./commentConsumer";
 
 const consumers: any = {
     ApiJwt: { ...jwtConsumer },
@@ -18,6 +19,7 @@ const consumers: any = {
     ApiPuzzle: { ...puzzleConsumer },
     ApiAccessory: { ...accessoryConsumer },
     ApiLike: {...likeConsumer },
+    ApiComment: {...commentConsumer },
 }
 
 export default consumers;

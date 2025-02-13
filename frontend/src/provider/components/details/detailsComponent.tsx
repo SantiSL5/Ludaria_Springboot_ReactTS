@@ -1,15 +1,47 @@
+import Rating from "@mui/material/Rating";
+import DeleteIcon from '@mui/icons-material/Delete';
+import { useState } from "react";
+import { toast } from "react-toastify";
+import dayjs from "dayjs";
+import { IconButton } from "@mui/material";
+
+
 interface DetailsProps {
   product: any;
   onLike: (product: number) => void;
+  onNewComment: (data: any) => void;
+  onDeleteComment: (id: number) => void;
 }
 
 
-const DetailsComponent : React.FC<DetailsProps> = ({ product, onLike })=> {
-    console.log(product)
+const DetailsComponent : React.FC<DetailsProps> = ({ product, onLike, onNewComment, onDeleteComment })=> {
+    const [comment, setComment] = useState("");
+    const [rate, setRate]= useState(0);
+    const maxLength = 280;
+
+    const handleInputChange = (e:any) => {
+        setComment(e.target.value);
+    };
 
     const like = (product : number) => {
         onLike(product);
     }
+
+    const deleteComment = () => {
+        onDeleteComment(product.comment.id);
+    }
+
+    const handleComment = () => {
+        if (rate<=0) {
+            toast.info("Añade una valoración");
+        }
+        if (comment != "" && rate > 0) {
+            console.log("Comentario enviado:", comment, rate);
+            onNewComment({"content": comment, "product": product.id, "rate": rate});
+            setComment("");
+            setRate(0);
+        }
+    };
 
     return (
       <div className="container mx-auto p-6">
@@ -41,7 +73,6 @@ const DetailsComponent : React.FC<DetailsProps> = ({ product, onLike })=> {
                 {product.type == "PUZZLE" ? <p className="text-lg mt-2">Dificultad: <span className="font-bold">{product.difficulty}</span></p> : <></>}
 
                 {product.type == "ACCESSORY" && product.game != null ? <p className="text-lg mt-2">Expansión de: <span className="font-bold">{product.game.name}</span></p> : <></>}
-
                 <div className="flex items-center mt-3">
                         <p className="text-lg text-black mr-1">{product.likes || 0} </p>
                         <button
@@ -63,6 +94,61 @@ const DetailsComponent : React.FC<DetailsProps> = ({ product, onLike })=> {
                 </div>
             </div>
         </div>
+        
+        <div className="mt-6">
+            {product.comment ? (
+                    <div>
+                        <h2 className="text-2xl font-bold">Tu comentario</h2>
+                        <div className="bg-gray-100 p-4 rounded-lg mt-4 relative">
+                            <div className="absolute top-2 right-2">
+                                <IconButton color="error" aria-label="delete" onClick={deleteComment}>
+                                    <DeleteIcon/>
+                                </IconButton>
+                            </div>
+                            <div className="mt-2">
+                                <Rating defaultValue={product.comment.rate} readOnly/>
+                            </div>
+                            <p className="text-lg ml-1">{product.comment.content}</p>
+                            <p className="text-md ml-1 mt-3">{dayjs(product.comment.createdAt).format("DD/MM/YYYY HH:mm")}</p>
+                        </div>
+                    </div>
+            ) : (
+                <div>
+                    <h2 className="text-2xl font-bold">Deja tu comentario</h2>
+                    <div className="mt-6">
+                        <label htmlFor="rate" className="block text-lg font-semibold mb-2">
+                        Valoración
+                        </label>
+                        <Rating
+                            id="rate"
+                            name="rate"
+                            value={rate}
+                            onChange={(event, newValue:any) => {
+                                setRate(newValue);
+                            }}
+                        />
+                        <label htmlFor="content" className="block text-lg font-semibold mb-2">
+                        Comentario
+                        </label>
+                        <textarea
+                            id="content"
+                            name="content"
+                            rows={3}
+                            maxLength={maxLength}
+                            value={comment}
+                            onChange={handleInputChange}
+                            className="w-full border rounded-lg p-2"
+                            placeholder="Escribe tu comentario aquí..."
+                        ></textarea>
+                        <p className="text-right text-sm text-gray-500">
+                        {comment.length}/{maxLength}
+                        </p>
+                        <button onClick={handleComment} className="bg-blue-500 text-white py-2 px-4 rounded-lg mt-4 hover:bg-blue-600">Enviar comentario</button>
+                    </div>
+                </div>
+            )}
+        </div>
+
       </div>
     );
 };

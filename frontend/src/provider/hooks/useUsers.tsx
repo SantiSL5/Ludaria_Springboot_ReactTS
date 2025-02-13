@@ -19,6 +19,8 @@ export function useUsers() {
                 setUser(res);
                 if (res.data.role === "ROLE_ADMIN") {
                     setIsAdmin(true);
+                }else {
+                    setIsAdmin(false)
                 }
                 setLoading(false);
             }).catch((e: any) => {
