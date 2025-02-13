@@ -65,21 +65,4 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
             @Param("maxPrice") BigDecimal maxPrice,
             @Param("user") Long user
     );
-//    @Query( "SELECT p, " +
-//            "(SELECT COUNT(l) FROM Like l WHERE l.product.id = :productId) AS likes " +
-//            "FROM Product p " +
-//            "WHERE p.id = :productId")
-//    Object[] findProductWithLikes(
-//            @Param("productId") Long productId
-//    );
-//    @Query( "SELECT p, " +
-//            "(SELECT COUNT(l) FROM Like l WHERE l.product.id = :productId) AS likes, " +
-//            "(SELECT COUNT(l) > 0 FROM Like l WHERE l.product.id = :productId AND l.user.id = :user) AS liked " +
-//            "(SELECT * FROM Comment c WHERE c.product.id = :productId AND c.user.id = :user) AS comment " +
-//            "FROM Product p " +
-//            "WHERE p.id = :productId")
-//    Object[] findProductWithAuth(
-//            @Param("productId") Long productId,
-//            @Param("user") Long user
-//    );
 }

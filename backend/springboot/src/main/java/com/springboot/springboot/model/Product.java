@@ -60,6 +60,12 @@ public class Product {
     @Transient
     private Comment comment;
 
+    @Transient
+    private Long numComments;
+
+    @Transient
+    private Float rating;
+
     public Product() {
     }
 
@@ -181,5 +187,21 @@ public class Product {
 
     public void setComment(Comment comment) {
         this.comment = comment;
+    }
+
+    public Long getNumComments() {
+        return numComments;
+    }
+
+    public void setNumComments(Long numComments) {
+        this.numComments = numComments;
+    }
+
+    public Float getRating() {
+        return rating;
+    }
+
+    public void setRating(Float rating) {
+        this.rating = rating;
     }
 }

@@ -4,6 +4,7 @@ import { useState } from "react";
 import { toast } from "react-toastify";
 import dayjs from "dayjs";
 import { IconButton } from "@mui/material";
+import ChatBubbleOutlineIcon from '@mui/icons-material/ChatBubbleOutline';
 
 
 interface DetailsProps {
@@ -54,25 +55,9 @@ const DetailsComponent : React.FC<DetailsProps> = ({ product, onLike, onNewComme
                 />
             </div>
             <div className="md:w-1/2 md:pl-6">
-                <h2 className="text-4xl font-bold">{product.name}</h2>
-                <p className="text-lg font-semibold mt-4">{product.price} €</p>
-                <h2 className="text-2xl mt-4 font-bold">Descripción</h2>
-                <p className="text-lg mt-2">{product.description}</p>
-                <h2 className="text-2xl mt-4 font-bold">Especificaciones</h2>
-                <p className="text-lg mt-2">Categoría: <span className="font-bold">{product.category.name}</span></p>
-                <p className="text-lg mt-2">Edad: <span className="font-bold">+{product.age}</span></p>
-
-                {product.type == "GAME" ? <p className="text-lg mt-2">Autor/es: <span className="font-bold">{product.author}</span></p> : <></>}
-                {product.type == "GAME" ? <p className="text-lg mt-2">Dificultad: <span className="font-bold">{product.difficulty}</span></p> : <></>}
-                {product.type == "GAME" ? <p className="text-lg mt-2">Duración: <span className="font-bold">{product.duration}</span></p> : <></>}
-                {product.type == "GAME" ? <p className="text-lg mt-2">Jugadores: <span className="font-bold">{product.minPlayers}-{product.maxPlayers}</span></p> : <></>}
-                {product.type == "GAME" ? <p className="text-lg mt-2">Fecha de publicación: <span className="font-bold">{product.launchDate}</span></p> : <></>}
-
-                {product.type == "PUZZLE" ? <p className="text-lg mt-2">Autor/es: <span className="font-bold">{product.author}</span></p> : <></>}
-                {product.type == "PUZZLE" ? <p className="text-lg mt-2">Número de piezas: <span className="font-bold">{product.numPieces}</span></p> : <></>}
-                {product.type == "PUZZLE" ? <p className="text-lg mt-2">Dificultad: <span className="font-bold">{product.difficulty}</span></p> : <></>}
-
-                {product.type == "ACCESSORY" && product.game != null ? <p className="text-lg mt-2">Expansión de: <span className="font-bold">{product.game.name}</span></p> : <></>}
+                <h2 className="text-5xl font-bold">{product.name}</h2>
+                <Rating className="mt-5" defaultValue={product.rating} precision={0.1} size="large" readOnly/>
+                <p className="text-xl font-semibold mt-4">{product.price} €</p>
                 <div className="flex items-center mt-3">
                         <p className="text-lg text-black mr-1">{product.likes || 0} </p>
                         <button
@@ -92,6 +77,26 @@ const DetailsComponent : React.FC<DetailsProps> = ({ product, onLike, onNewComme
                             </svg>
                         </button>
                 </div>
+                <div>
+                    <span className="text-lg">{product.numComments}</span> <ChatBubbleOutlineIcon />
+                </div>
+                <h2 className="text-2xl mt-4 font-bold">Descripción</h2>
+                <p className="text-lg mt-2">{product.description}</p>
+                <h2 className="text-2xl mt-4 font-bold">Especificaciones</h2>
+                <p className="text-lg mt-2">Categoría: <span className="font-bold">{product.category.name}</span></p>
+                <p className="text-lg mt-2">Edad: <span className="font-bold">+{product.age}</span></p>
+
+                {product.type == "GAME" ? <p className="text-lg mt-2">Autor/es: <span className="font-bold">{product.author}</span></p> : <></>}
+                {product.type == "GAME" ? <p className="text-lg mt-2">Dificultad: <span className="font-bold">{product.difficulty}</span></p> : <></>}
+                {product.type == "GAME" ? <p className="text-lg mt-2">Duración: <span className="font-bold">{product.duration}</span></p> : <></>}
+                {product.type == "GAME" ? <p className="text-lg mt-2">Jugadores: <span className="font-bold">{product.minPlayers}-{product.maxPlayers}</span></p> : <></>}
+                {product.type == "GAME" ? <p className="text-lg mt-2">Fecha de publicación: <span className="font-bold">{product.launchDate}</span></p> : <></>}
+
+                {product.type == "PUZZLE" ? <p className="text-lg mt-2">Autor/es: <span className="font-bold">{product.author}</span></p> : <></>}
+                {product.type == "PUZZLE" ? <p className="text-lg mt-2">Número de piezas: <span className="font-bold">{product.numPieces}</span></p> : <></>}
+                {product.type == "PUZZLE" ? <p className="text-lg mt-2">Dificultad: <span className="font-bold">{product.difficulty}</span></p> : <></>}
+
+                {product.type == "ACCESSORY" && product.game != null ? <p className="text-lg mt-2">Expansión de: <span className="font-bold">{product.game.name}</span></p> : <></>}
             </div>
         </div>
         
@@ -120,8 +125,6 @@ const DetailsComponent : React.FC<DetailsProps> = ({ product, onLike, onNewComme
                         Valoración
                         </label>
                         <Rating
-                            id="rate"
-                            name="rate"
                             value={rate}
                             onChange={(event, newValue:any) => {
                                 setRate(newValue);

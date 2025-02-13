@@ -136,6 +136,8 @@ public class ProductService {
                     product.setLikes(likeRepository.countLikesByProduct(product.getId()));
                     product.setLiked(likeRepository.checkLike(user.getId(), product.getId()).isPresent());
                     Optional<Comment> comment = commentRepository.checkComment(user.getId(), product.getId());
+                    product.setNumComments(commentRepository.numComments(product.getId()));
+                    product.setRating(commentRepository.productRating(product.getId()));
                     comment.ifPresent(product::setComment);
                 }else {
                     product.setLikes(likeRepository.countLikesByProduct(product.getId()));
