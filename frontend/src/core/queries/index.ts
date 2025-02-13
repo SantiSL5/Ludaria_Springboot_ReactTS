@@ -9,6 +9,7 @@ import jwtQueries from "./jwtQueries";
 import userQueries from "./userQueries";
 import likeQueries from "./likeQueries";
 import commentQueries from "./commentQueries";
+import cartQueries from "./cartQueries";
 
 export {
     queryConsumer,
@@ -22,4 +23,5 @@ export {
     accessoryQueries,
     likeQueries,
     commentQueries,
+    cartQueries,
 };

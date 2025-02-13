@@ -1,13 +1,16 @@
 import { useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import Rating from '@mui/material/Rating';
+import { useUsers } from '../../hooks/useUsers';
 
 interface ListProps {
     items: any[];
     onLike: (product: number) => void;
+    onAddToCard: (product: number) => void;
 }
 
-const ListComponent: React.FC<ListProps> = ({ items, onLike }) => {
+const ListComponent: React.FC<ListProps> = ({ items, onLike, onAddToCard }) => {
+    const {user, isAdmin} = useUsers();
 
     const navigate = useNavigate();
 
@@ -18,6 +21,14 @@ const ListComponent: React.FC<ListProps> = ({ items, onLike }) => {
     const like = (product : number) => {
         onLike(product);
     }
+
+    const handleAddToCart = (product : number) => {
+        onAddToCard(product)
+    }
+
+    useEffect(() => {
+    
+    }, [user, isAdmin]);
 
     return (
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:lg:grid-cols-4">
@@ -60,6 +71,19 @@ const ListComponent: React.FC<ListProps> = ({ items, onLike }) => {
                             <p>{item.numComments || 0} Comentarios</p>
                             <p className="flex items-center"><Rating size="small" defaultValue={item.rating} precision={0.1} readOnly />{item.rating ? item.rating.toFixed(1) : "N/A"}</p>
                     </div>
+                    {user ? (
+                        <div className="flex items-center justify-end mt-2 text-sm text-gray-500">
+                            <button 
+                                onClick={(e) => {
+                                    e.stopPropagation();
+                                    handleAddToCart(item.id);
+                                }}
+                                className="bg-blue-500 text-white py-1 px-3 rounded-lg hover:bg-blue-600 ml-auto"
+                            >
+                                Añadir al carrito
+                            </button>
+                        </div>
+                    ) : <></>}
                 </div>
             ))}
         </div>

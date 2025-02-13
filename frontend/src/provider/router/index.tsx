@@ -17,6 +17,9 @@ import AdminPuzzles from '../pages/Admin/puzzles';
 import AdminGames from '../pages/Admin/games';
 import AdminAccessories from '../pages/Admin/accesories';
 import DetailsPage from '../pages/Details';
+import { AuthGuard } from './guards/AuthGuard';
+import AdminGuard from './guards/AdminGuard';
+import Cart from '../pages/Cart';
 
 
 const Router = () => {
@@ -30,7 +33,7 @@ const Router = () => {
                     <Route path="/register" element={<Register />}></Route>
                     <Route path="/shop" element={<Shop />}></Route>
                     <Route path="/shop/details/:id" element={<DetailsPage />} />
-                    <Route>
+                    <Route element={<AdminGuard />}>
                         <Route path="/admin/" >
                         <Route index element={<Admin />} />
                             <Route path="brands/" element={<AdminBrands />}/>
@@ -40,6 +43,10 @@ const Router = () => {
                             <Route path="games/" element={<AdminGames />}/>
                             <Route path="accessories/" element={<AdminAccessories />}/>
                         </Route>
+                    </Route>
+                    <Route element={<AuthGuard />}>
+                        <Route path="/cart/" element={<Cart />}></Route>
+                        {/* <Route path="/profile/" element={<Profile />}></Route> */}
                     </Route>
                 </Routes>
             </Layout>

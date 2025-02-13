@@ -1,7 +1,9 @@
 import { Avatar, Button, Navbar } from "flowbite-react";
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import "./style.css"
 import { useUsers } from "../../hooks/useUsers";
+import { IconButton } from "@mui/material";
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 
 interface Props {
     href: string;
@@ -32,6 +34,7 @@ const NavbarLinkActive: React.FC<Props> = ({ href, children }) => {
 };
 
 const Header = () => {
+    const navigate = useNavigate();
     const { user, isAdmin, logout } = useUsers();
     return (      
         <> 
@@ -43,6 +46,13 @@ const Header = () => {
                     {
                     user ? (
                         <>
+                            <IconButton aria-label="cart"
+                                    onClick={() => {
+                                        navigate(`/cart`)
+                                    }}
+                                >
+                                <ShoppingCartIcon/>
+                            </IconButton>
                             <Avatar img={user.data.photo} rounded={true} />
 
                             <a href="/profile" className="text-base">

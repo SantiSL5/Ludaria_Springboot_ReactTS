@@ -7,12 +7,14 @@ import PaginationComponent from '../../components/generic/paginationComponent';
 import { useCategories } from '../../hooks/useCategories';
 import { useBrands } from '../../hooks/useBrands';
 import { useLikes } from '../../hooks/useLike';
+import { useCart } from '../../hooks/useCart';
 
 const ShopPage = () => {
     const { setLike } = useLikes();
     const { products, getProductsFilters, pages } = useProducts();
     const { categories, getAllCategories } = useCategories();
     const { brands, getAllBrands } = useBrands();
+    const { addCartLine } = useCart();
     const [currentPage, setCurrentPage] = useState(1);
 
     const [filters, setFilters] = useState({
@@ -52,6 +54,14 @@ const ShopPage = () => {
         }
     };
 
+    const handleAddToCart = (product:number) => {
+        try {
+            addCartLine({"cant":1, "product":product})
+        } catch (e) {
+            console.log(e);
+        }
+    }
+
     return (
     <div className="container mx-auto p-4">
         <div className="flex flex-col lg:flex-row gap-6">
@@ -60,7 +70,7 @@ const ShopPage = () => {
             </aside>
 
             <div className="flex-1">
-                {products ? (<ListComponent items={products} onLike={handleLike} />) : <Spinner />}
+                {products ? (<ListComponent items={products} onLike={handleLike} onAddToCard={handleAddToCart} />) : <Spinner />}
                 {products ? (<PaginationComponent currentPage={currentPage} totalPages={pages} onPageChange={handlePageChange} />) : <Spinner />}
             </div>
         </div>
