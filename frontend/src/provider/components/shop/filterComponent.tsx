@@ -11,17 +11,18 @@ interface FilterComponentProps {
         maxPrice: number | null;
         search: string | null;
     }) => void;
+    initialFilters: {
+        type: string | null;
+        category: string | null;
+        brand: string | null;
+        minPrice: number | null;
+        maxPrice: number | null;
+        search: string | null;
+    };
 }
 
-const FilterComponent: React.FC<FilterComponentProps> = ({ categories, brands, onFiltersChange }) => {
-    const [filters, setFilters] = useState({
-        type: null,
-        category: null,
-        brand: null,
-        minPrice: null,
-        maxPrice: null,
-        search: null,
-    });
+const FilterComponent: React.FC<FilterComponentProps> = ({ categories, brands, onFiltersChange, initialFilters }) => {
+    const [filters, setFilters] = useState(initialFilters);
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
       const { name, value, type } = e.target;
@@ -48,8 +49,6 @@ const FilterComponent: React.FC<FilterComponentProps> = ({ categories, brands, o
             brand: null,
             minPrice: null,
             maxPrice: null,
-            minPlayers: null,
-            maxPlayers: null,
             search: null,
         };
         setFilters(resetFilters);

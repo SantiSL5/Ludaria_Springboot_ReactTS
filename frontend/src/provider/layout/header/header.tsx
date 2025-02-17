@@ -39,7 +39,7 @@ const Header = () => {
     return (      
         <> 
             <Navbar border>
-                <Navbar.Brand>
+                <Navbar.Brand href="/home">
                     <span className="self-center whitespace-nowrap text-3xl font-bold text-custom-orange">Ludaria</span>
                 </Navbar.Brand>
                 <div className="flex items-center justify-between md:order-2 space-x-2">
@@ -73,7 +73,12 @@ const Header = () => {
                 </div>
                 <Navbar.Collapse>
                     <NavbarLinkActive href="/">HOME</NavbarLinkActive>
-                    <NavbarLinkActive href="/shop">SHOP</NavbarLinkActive>
+                    <NavbarLinkActive href="/shop">TIENDA</NavbarLinkActive>
+                    <NavbarLinkActive href="#">JUEGOS</NavbarLinkActive>
+                    <NavbarLinkActive href="#">ACCESORIOS</NavbarLinkActive>
+                    <NavbarLinkActive href="#">OFERTAS</NavbarLinkActive>
+                    <NavbarLinkActive href="#">CONTACTO</NavbarLinkActive>
+                    <NavbarLinkActive href="#">TARJETA REGALO</NavbarLinkActive>
                     {isAdmin ? <NavbarLinkActive href="/admin">ADMIN</NavbarLinkActive> : <></>}
                 </Navbar.Collapse>
             </Navbar>

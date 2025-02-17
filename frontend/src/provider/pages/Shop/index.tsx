@@ -8,6 +8,7 @@ import { useCategories } from '../../hooks/useCategories';
 import { useBrands } from '../../hooks/useBrands';
 import { useLikes } from '../../hooks/useLike';
 import { useCart } from '../../hooks/useCart';
+import { useLocation } from 'react-router-dom';
 
 const ShopPage = () => {
     const { setLike } = useLikes();
@@ -16,6 +17,11 @@ const ShopPage = () => {
     const { brands, getAllBrands } = useBrands();
     const { addCartLine } = useCart();
     const [currentPage, setCurrentPage] = useState(1);
+
+    const location = useLocation();
+    const queryParams = new URLSearchParams(location.search);
+    
+    const categoryParam = queryParams.get('category');
 
     const [filters, setFilters] = useState({
         type: null,
@@ -29,6 +35,15 @@ const ShopPage = () => {
     useEffect(() => {
         getProductsFilters(12,currentPage-1, filters);
     }, [filters, currentPage]);
+
+    useEffect(() => {
+        if (categoryParam) {
+            setFilters(prevFilters => ({
+                ...prevFilters,
+                category: categoryParam ?? null,
+            }));
+        }
+    }, [categoryParam]);
 
 
     if (!categories) getAllCategories();
@@ -66,7 +81,7 @@ const ShopPage = () => {
     <div className="container mx-auto p-4">
         <div className="flex flex-col lg:flex-row gap-6">
             <aside className="w-full lg:w-72 bg-gray-100 p-4 rounded-lg">
-                {categories && brands ? (<FilterComponent categories={categories} brands={brands} onFiltersChange={handleFiltersChange} />) : <Spinner />}
+                {categories && brands ? (<FilterComponent categories={categories} brands={brands} onFiltersChange={handleFiltersChange} initialFilters={filters}/>) : <Spinner />}
             </aside>
 
             <div className="flex-1">
