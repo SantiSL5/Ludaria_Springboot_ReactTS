@@ -10,7 +10,6 @@ interface CartListProps {
 
 const cartListComponent : React.FC<CartListProps> = ({ cart, onUpdate, onDelete, onCheckout })=> {
     const { user } = useUsers();
-    console.log(cart.cartLines)
 
     if (!user) {
         return <p className="text-center text-red-500">Debes iniciar sesión para ver tu carrito.</p>;

@@ -12,7 +12,6 @@ export function useProducts() {
 
     const getAllProducts = (() => {
         consume(queryConsumer.apiProduct, productQueries.getAllProducts).then((res: any) => {
-            console.log(res);
             setProducts(res.data)
         }).catch((e: any) => {
             console.log(e);
@@ -28,10 +27,8 @@ export function useProducts() {
         search: number | null;
     }) => {
         const { type, category, brand, minPrice, maxPrice, search} = filters;
-        console.log(limit,offset,filters);
     
         consume(queryConsumer.apiProduct, productQueries.getAllProducts, { limit, offset, type, category, brand, minPrice, maxPrice, search}).then((res: any) => {
-            console.log(res);
             setProducts(res.data.products);
             setPages(res.data.pages);
         }).catch((e: any) => {
@@ -41,7 +38,6 @@ export function useProducts() {
 
     const getAllGames = ((type: string) => {
         consume(queryConsumer.apiProduct, productQueries.getAllProducts, { type }).then((res: any) => {
-            console.log(res);
             setProducts(res.data)
         }).catch((e: any) => {
             console.log(e);
@@ -50,7 +46,6 @@ export function useProducts() {
 
     const getAllPuzzles = ((type: string) => {
         consume(queryConsumer.apiProduct, productQueries.getAllProducts, { type }).then((res: any) => {
-            console.log(res);
             setProducts(res.data)
         }).catch((e: any) => {
             console.log(e);
@@ -59,7 +54,6 @@ export function useProducts() {
 
     const getAllAccessories = ((type: string) => {
         consume(queryConsumer.apiProduct, productQueries.getAllProducts, { type }).then((res: any) => {
-            console.log(res);
             setProducts(res.data)
         }).catch((e: any) => {
             console.log(e);
@@ -68,7 +62,6 @@ export function useProducts() {
     
     const getProduct = ((id:any) => {
         consume(queryConsumer.apiProduct, productQueries.getProduct, id).then((res: any) => {
-            console.log(res);
             setProduct(res.data);
         }).catch((res: any) => {
             if (res.response.data != null) {

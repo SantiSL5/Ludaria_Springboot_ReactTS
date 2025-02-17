@@ -20,7 +20,6 @@ const AdminCategories = () => {
             setOp(op);
             setupdateData(data);
         }
-        console.log("Updated state:", { op, updateData: data });
     };
 
     return (

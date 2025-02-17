@@ -22,7 +22,6 @@ const AdminGames = () => {
             setOp(op);
             setUpdateData(data);
         }
-        console.log("Updated state:", { op, updateData: data });
     };
 
     return (

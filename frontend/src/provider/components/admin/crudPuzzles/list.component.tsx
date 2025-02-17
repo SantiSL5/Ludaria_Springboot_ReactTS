@@ -106,7 +106,6 @@ const List = ({ list, deleteProduct, deleteManyProducts, changeForm }: any) => {
                     >Update</button>
                     <button type="button" className="bg-red-600 text-white px-4 py-2 rounded"
                         onClick={() => {
-                            console.log(row.id);
                             deleteProduct(row.id);
                         }}
                     > Delete</button>

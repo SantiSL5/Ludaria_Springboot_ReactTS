@@ -45,7 +45,6 @@ const DetailsComponent : React.FC<DetailsProps> = ({ product, onLike, onNewComme
             toast.info("Añade una valoración");
         }
         if (comment != "" && rate > 0) {
-            console.log("Comentario enviado:", comment, rate);
             onNewComment({"content": comment, "product": product.id, "rate": rate});
             setComment("");
             setRate(0);

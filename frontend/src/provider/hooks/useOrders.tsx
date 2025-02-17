@@ -22,7 +22,6 @@ export function useOrders() {
 
     const createOrder = (() => {
         consume(queryConsumer.apiOrder, orderQueries.createOrder).then((res: any) => {
-            console.log(res);
             toast.success("Compra realizada")
             navigate('/shop')
         }).catch((res: any) => {

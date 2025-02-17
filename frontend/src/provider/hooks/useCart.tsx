@@ -8,7 +8,6 @@ export function useCart() {
 
     const getCart = (() => {
         consume(queryConsumer.apiCart, cartQueries.getCart).then((res: any) => {
-            console.log(res);
             setCart(res.data);
         }).catch((res: any) => {
             if (res.response.data != null) {
@@ -21,7 +20,6 @@ export function useCart() {
 
     const cleanCart = (() => {
         consume(queryConsumer.apiCart, cartQueries.cleanCart).then((res: any) => {
-            console.log(res);
             setCart(null);
         }).catch((res: any) => {
             if (res.response.data != null) {
@@ -34,7 +32,6 @@ export function useCart() {
 
     const addCartLine = ((data:any) => {
         consume(queryConsumer.apiCart, cartQueries.addCartLine, data).then((res: any) => {
-            console.log(res);
             toast.success("Producto añadido al carrito")
             getCart();
         }).catch((res: any) => {

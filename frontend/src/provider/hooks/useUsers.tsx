@@ -44,7 +44,6 @@ export function useUsers() {
 
     const register = ((data: any) => {
         consume(queryConsumer.apiUser, userQueries.register, data).then((res: any) => {
-            console.log(res);
             setUser(res.data.user);
             setToken(res.data.token);
             consume(queryConsumer.apiJwt, jwtQueries.setToken, res.data.token);
@@ -52,7 +51,6 @@ export function useUsers() {
             navigate('/');
             window.location.reload();
         }).catch((res:any) => {
-            console.log(res.response.data);
             if (res.response.data != null) {
                 toast.error(res.response.data, { theme: "dark" })
             } else {
@@ -63,7 +61,6 @@ export function useUsers() {
 
     const login = ((data: any) => {
         consume(queryConsumer.apiUser, userQueries.login, data).then((res: any) => {
-            console.log(data);
             setUser(res.data.user);
             setToken(res.data.token);
             consume(queryConsumer.apiJwt, jwtQueries.setToken, res.data.token);
@@ -71,7 +68,6 @@ export function useUsers() {
             navigate('/');
             window.location.reload();
         }).catch((res:any) => {
-            console.log(res.response.data);
             if (res.response.data != null) {
                 toast.error(res.response.data, { theme: "dark" })
             } else {

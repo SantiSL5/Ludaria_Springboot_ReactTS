@@ -11,7 +11,6 @@ export function useCategories() {
 
     const getAllCategories = (() => {
         consume(queryConsumer.apiCategory, categoryQueries.getAllCategories).then((res: any) => {
-            console.log(res);
             setCategories(res.data)
         }).catch((e: any) => {
             console.log(e);
@@ -20,7 +19,6 @@ export function useCategories() {
     
     const getCategory = ((id:any) => {
         consume(queryConsumer.apiCategory, categoryQueries.getCategory, id).then((res: any) => {
-            console.log(res);
             setCategory(res.data);
         }).catch((res: any) => {
             if (res.response.data != null) {

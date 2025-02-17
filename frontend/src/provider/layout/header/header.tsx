@@ -36,6 +36,7 @@ const NavbarLinkActive: React.FC<Props> = ({ href, children }) => {
 const Header = () => {
     const navigate = useNavigate();
     const { user, isAdmin, logout } = useUsers();
+
     return (      
         <> 
             <Navbar border>
@@ -45,11 +46,12 @@ const Header = () => {
                 <div className="flex items-center justify-between md:order-2 space-x-2">
                     {user ? (
                         <>
-                            <IconButton aria-label="cart"
-                                    onClick={() => {
+                            <IconButton 
+                                aria-label="cart"
+                                        onClick={() => {
                                         navigate(`/cart`)
-                                    }}
-                                >
+                                }}
+                            >
                                 <ShoppingCartIcon/>
                             </IconButton>
                             <Avatar img={user.data.photo} rounded={true} />

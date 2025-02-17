@@ -11,7 +11,6 @@ export function useBrands() {
 
     const getAllBrands = (() => {
         consume(queryConsumer.apiBrand, brandQueries.getAllBrands).then((res: any) => {
-            console.log(res);
             setBrands(res.data)
         }).catch((e: any) => {
             console.log(e);
@@ -20,7 +19,6 @@ export function useBrands() {
     
     const getBrand = ((id:any) => {
         consume(queryConsumer.apiBrand, brandQueries.getBrand, id).then((res: any) => {
-            console.log(res);
             setBrand(res.data);
         }).catch((res: any) => {
             if (res.response.data != null) {

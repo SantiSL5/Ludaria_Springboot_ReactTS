@@ -10,9 +10,6 @@ interface ProfileProps {
 
 const ProfileComponent: React.FC<ProfileProps> = ({ orders, user }) => {
 
-    // const [openOrderId, setOpenOrderId] = useState<number | null>(null);
-    console.log(orders.data)
-
     return (
         <div>
             {user ? (

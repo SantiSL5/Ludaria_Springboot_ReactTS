@@ -76,7 +76,6 @@ const CreateUpdateGame = ({
             createGame(data);
             window.location.reload();
         } else if (operation === "update") {
-            console.log(data);
             updateGame(data);
             changeForm(null, "create");
             window.location.reload();

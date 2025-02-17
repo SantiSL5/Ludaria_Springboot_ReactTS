@@ -13,7 +13,6 @@ const Cart = () => {
     }, []);
 
     const handleUpdate = async (cardLine:any, cant: number) => {
-        console.log(cardLine)
         if (cant > cardLine.product.stock) {
             toast.error("No hay mas stock disponible de este producto")
         } else if (cant <= 0) {
@@ -46,10 +45,7 @@ const Cart = () => {
 
     const handleCheckout = () => {
         createOrder()
-    }
-
-    console.log(cart)
-    
+    }    
 
     return (
         <div className="container flex justify-items-center mx-auto my-5 ">

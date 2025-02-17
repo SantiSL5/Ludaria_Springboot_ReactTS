@@ -86,13 +86,13 @@ public class UserService {
     public ResponseEntity register(RegisterRequest registerUser) {
         try {
             if (userRepository.existsByUsername(registerUser.getUsername()) > 0 && userRepository.existsByEmail(registerUser.getEmail()) > 0 ) {
-                return new ResponseEntity<>("Email and username already taked", HttpStatus.CONFLICT);
+                return new ResponseEntity<>("Correo y usuario ya registrados", HttpStatus.CONFLICT);
             }
             if (userRepository.existsByUsername(registerUser.getUsername()) > 0) {
-                return new ResponseEntity<>("Username already taked", HttpStatus.CONFLICT);
+                return new ResponseEntity<>("El usuario ya esta registrado", HttpStatus.CONFLICT);
             }
             if (userRepository.existsByEmail(registerUser.getEmail()) > 0) {
-                return new ResponseEntity<>("Email already taked", HttpStatus.CONFLICT);
+                return new ResponseEntity<>("El correo ya esta registrado", HttpStatus.CONFLICT);
             }
 
             User user = new User();
@@ -118,7 +118,7 @@ public class UserService {
     public ResponseEntity login(LoginRequest loginUser) {
         try {
             if (userRepository.existsByEmail(loginUser.getEmail()) == 0) {
-                return new ResponseEntity<>("Email not found", HttpStatus.NOT_FOUND);
+                return new ResponseEntity<>("Correo no encontrado", HttpStatus.NOT_FOUND);
             }
             User user = userRepository.findByEmail(loginUser.getEmail()).get();
             Authentication authentication = authenticationManager.authenticate(
@@ -128,7 +128,7 @@ public class UserService {
             String jwt = jwtUtils.generateJwtToken(authentication);
             return new ResponseEntity<>(new UserAndToken(user, jwt), HttpStatus.OK);
         } catch (Exception e) {
-            return new ResponseEntity<>("Wrong password", HttpStatus.CONFLICT);
+            return new ResponseEntity<>("Contraseña incorrecta", HttpStatus.CONFLICT);
         }
     }
 
@@ -188,10 +188,10 @@ public class UserService {
     public ResponseEntity createUser(NewUserRequest newUser) {
         try {
             if (userRepository.existsByUsername(newUser.getUsername()) > 0 && userRepository.existsByEmail(newUser.getEmail()) > 0 ) {
-                return new ResponseEntity<>("Email and username already taked", HttpStatus.CONFLICT);
+                return new ResponseEntity<>("Correo y usuario ya registrados", HttpStatus.CONFLICT);
             }
             if (userRepository.existsByUsername(newUser.getUsername()) > 0) {
-                return new ResponseEntity<>("Username already taked", HttpStatus.CONFLICT);
+                return new ResponseEntity<>("El usuario ya esta registrado", HttpStatus.CONFLICT);
             }
             if (userRepository.existsByEmail(newUser.getEmail()) > 0) {
                 return new ResponseEntity<>("Email already taked", HttpStatus.CONFLICT);
@@ -226,7 +226,7 @@ public class UserService {
             }
             if (updatedUser.getEmail() != null) {
                 if (userRepository.existsByEmail(updatedUser.getEmail()) > 0 && !Objects.equals(user.getEmail(), updatedUser.getEmail())) {
-                    return new ResponseEntity<>("Email already taked", HttpStatus.CONFLICT);
+                    return new ResponseEntity<>("El correo ya esta registrado", HttpStatus.CONFLICT);
                 }
                 user.setEmail(updatedUser.getEmail());
             }
