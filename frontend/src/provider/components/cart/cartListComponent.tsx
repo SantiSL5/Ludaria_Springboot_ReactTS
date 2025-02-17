@@ -64,7 +64,6 @@ const cartListComponent : React.FC<CartListProps> = ({ cart, onUpdate, onDelete,
                                     <button
                                         onClick={() => updateLine(item, item.cant - 1)} 
                                         className="bg-gray-300 text-black p-2 rounded"
-                                        disabled={item.cant <= 1}
                                     >
                                         -
                                     </button>

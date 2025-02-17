@@ -30,7 +30,6 @@ const ShopPage = () => {
     }, [filters, currentPage]);
 
 
-    // if (!products) getProductsFilters(12,currentPage-1, filters);
     if (!categories) getAllCategories();
     if (!brands) getAllBrands();
 

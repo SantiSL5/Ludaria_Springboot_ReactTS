@@ -7,11 +7,14 @@ import { useComments } from "../../hooks/useComments";
 import { useEffect, useState } from "react";
 import PaginationComponent from "../../components/generic/paginationComponent";
 import CommentsListComponent from "../../components/details/commentsListComponent";
+import { useCart } from "../../hooks/useCart";
 
 const DetailsPage = () => {
     const { id } = useParams<{ id: string }>();
     const { product, getProduct} = useProducts();
     const { setLike } = useLikes();
+    const { addCartLine } = useCart();
+    
 
     const { createComment, getComments, deleteComment, comments, pages } = useComments();
     const [currentPage, setCurrentPage] = useState(1);
@@ -55,10 +58,18 @@ const DetailsPage = () => {
       }
     };
 
+    const handleAddToCart = (product:number) => {
+      try {
+          addCartLine({"cant":1, "product":product})
+      } catch (e) {
+          console.log(e);
+      }
+    }
+
 
     return (
       <div className="mb-4">
-          {product ? (<DetailsComponent product={product} onLike={handleLike} onNewComment={handleNewComment} onDeleteComment={handleDeleteComment} />) : <Spinner />}
+          {product ? (<DetailsComponent product={product} onLike={handleLike} onNewComment={handleNewComment} onDeleteComment={handleDeleteComment} onAddToCart={handleAddToCart} />) : <Spinner />}
           {comments ? (<CommentsListComponent comments={comments} onDeleteComment={handleDeleteComment}/>) : <Spinner />}
           {comments && pages > 0 ? (<PaginationComponent currentPage={currentPage} totalPages={pages} onPageChange={handlePageChange} />) : <Spinner />}
       </div>

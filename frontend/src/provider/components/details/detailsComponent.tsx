@@ -14,10 +14,11 @@ interface DetailsProps {
   onLike: (product: number) => void;
   onNewComment: (data: any) => void;
   onDeleteComment: (id: number) => void;
+  onAddToCart: (product: number) => void;
 }
 
 
-const DetailsComponent : React.FC<DetailsProps> = ({ product, onLike, onNewComment, onDeleteComment })=> {
+const DetailsComponent : React.FC<DetailsProps> = ({ product, onLike, onNewComment, onDeleteComment, onAddToCart })=> {
     const {user, isAdmin} = useUsers();
     const [comment, setComment] = useState("");
     const [rate, setRate]= useState(0);
@@ -33,6 +34,10 @@ const DetailsComponent : React.FC<DetailsProps> = ({ product, onLike, onNewComme
 
     const deleteComment = () => {
         onDeleteComment(product.comment.id);
+    }
+
+    const addToCart = (product : number) => {
+        onAddToCart(product);
     }
 
     const handleComment = () => {
@@ -105,6 +110,23 @@ const DetailsComponent : React.FC<DetailsProps> = ({ product, onLike, onNewComme
                 {product.type == "PUZZLE" ? <p className="text-lg mt-2">Dificultad: <span className="font-bold">{product.difficulty}</span></p> : <></>}
 
                 {product.type == "ACCESSORY" && product.game != null ? <p className="text-lg mt-2">Expansión de: <span className="font-bold">{product.game.name}</span></p> : <></>}
+                {user ? (
+                        <div className="flex items-center justify-between mt-2 text-lg text-gray-500">
+                            {product.stock < 1 ? (
+                                <p className="text-red-600 flex items-center ml-auto mt-1"><InfoIcon className="items-center mr-1" />No stock</p>
+                            ) : (
+                                <button 
+                                onClick={(e) => {
+                                    e.stopPropagation();
+                                    addToCart(product.id);
+                                }}
+                                className="bg-blue-500 text-white py-1 px-3 rounded-lg hover:bg-blue-600 ml-auto"
+                                >
+                                    Añadir al carrito
+                                </button>
+                            )}
+                        </div>
+                ) : <></>}
             </div>
         </div>
         

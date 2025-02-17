@@ -16,7 +16,7 @@ const Cart = () => {
         console.log(cardLine)
         if (cant > cardLine.product.stock) {
             toast.error("No hay mas stock disponible de este producto")
-        } else if (cant < 0) {
+        } else if (cant <= 0) {
             try {
                 await deleteCardLine(cardLine.id);
                 getCart();
