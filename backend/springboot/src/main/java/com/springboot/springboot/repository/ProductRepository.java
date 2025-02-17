@@ -22,13 +22,15 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
             "(:category IS NULL OR p.category.id = :category) AND " +
             "(:brand IS NULL OR p.brand.id = :brand) AND " +
             "(:minPrice IS NULL OR p.price >= :minPrice) AND " +
-            "(:maxPrice IS NULL OR p.price <= :maxPrice)")
+            "(:maxPrice IS NULL OR p.price <= :maxPrice) AND " +
+            "(:search IS NULL OR LOWER(p.name) LIKE LOWER(:search))")
     List<Object[]> findProductsByFilters(
             @Param("type") ProductType type,
             @Param("category") Long category,
             @Param("brand") Long brand,
             @Param("minPrice") BigDecimal minPrice,
-            @Param("maxPrice") BigDecimal maxPrice
+            @Param("maxPrice") BigDecimal maxPrice,
+            @Param("search") String search
     );
     @Query( "SELECT p, " +
             "(SELECT COUNT(c) FROM Comment c WHERE c.product.id = p.id) AS comments, " +
@@ -40,14 +42,16 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
             "(:category IS NULL OR p.category.id = :category) AND " +
             "(:brand IS NULL OR p.brand.id = :brand) AND " +
             "(:minPrice IS NULL OR p.price >= :minPrice) AND " +
-            "(:maxPrice IS NULL OR p.price <= :maxPrice)")
+            "(:maxPrice IS NULL OR p.price <= :maxPrice) AND " +
+            "(:search IS NULL OR LOWER(p.name) LIKE LOWER(:search))")
     Page<Object[]> findProductsByFiltersPag(
             Pageable pageable,
             @Param("type") ProductType type,
             @Param("category") Long category,
             @Param("brand") Long brand,
             @Param("minPrice") BigDecimal minPrice,
-            @Param("maxPrice") BigDecimal maxPrice
+            @Param("maxPrice") BigDecimal maxPrice,
+            @Param("search") String search
     );
     @Query( "SELECT p, " +
             "(SELECT COUNT(c) FROM Comment c WHERE c.product.id = p.id) AS comments, " +
@@ -60,7 +64,8 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
             "(:category IS NULL OR p.category.id = :category) AND " +
             "(:brand IS NULL OR p.brand.id = :brand) AND " +
             "(:minPrice IS NULL OR p.price >= :minPrice) AND " +
-            "(:maxPrice IS NULL OR p.price <= :maxPrice)")
+            "(:maxPrice IS NULL OR p.price <= :maxPrice) AND " +
+            "(:search IS NULL OR LOWER(p.name) LIKE LOWER(:search))")
     Page<Object[]> findProductsByFiltersPagAuth(
             Pageable pageable,
             @Param("type") ProductType type,
@@ -68,6 +73,7 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
             @Param("brand") Long brand,
             @Param("minPrice") BigDecimal minPrice,
             @Param("maxPrice") BigDecimal maxPrice,
+            @Param("search") String search,
             @Param("user") Long user
     );
 }

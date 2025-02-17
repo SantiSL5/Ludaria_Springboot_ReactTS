@@ -9,6 +9,7 @@ interface FilterComponentProps {
         brand: string | null;
         minPrice: number | null;
         maxPrice: number | null;
+        search: string | null;
     }) => void;
 }
 
@@ -19,6 +20,7 @@ const FilterComponent: React.FC<FilterComponentProps> = ({ categories, brands, o
         brand: null,
         minPrice: null,
         maxPrice: null,
+        search: null,
     });
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
@@ -48,6 +50,7 @@ const FilterComponent: React.FC<FilterComponentProps> = ({ categories, brands, o
             maxPrice: null,
             minPlayers: null,
             maxPlayers: null,
+            search: null,
         };
         setFilters(resetFilters);
         onFiltersChange(resetFilters);
@@ -58,6 +61,18 @@ const FilterComponent: React.FC<FilterComponentProps> = ({ categories, brands, o
         <aside className="w-full sm:w-64 p-4 rounded-lg bg-gray-100">
             <h2 className="text-lg font-bold mb-4">Filtros</h2>
             <div className="space-y-4">
+                <div>
+                    <h3 className="font-semibold mb-2">Buscar</h3>
+                    <input
+                        type="text"
+                        name="search"
+                        value={filters.search || ''}
+                        onChange={handleChange}
+                        placeholder="Buscar productos..."
+                        className="w-full p-2 border rounded-md bg-white"
+                    />
+                </div>
+
                 <div>
                     <h3 className="font-semibold mb-2">Tipo de producto</h3>
                     <select

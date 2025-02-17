@@ -37,8 +37,9 @@ public class ProductController {
                                             @RequestParam(value = "category", required = false) String category,
                                             @RequestParam(value = "brand", required = false) String brand,
                                             @RequestParam(value = "minPrice", required = false) String minPrice,
-                                            @RequestParam(value = "maxPrice", required = false) String maxPrice) {
-        return productService.getProducts(limit, offset, type, category, brand, minPrice, maxPrice);
+                                            @RequestParam(value = "maxPrice", required = false) String maxPrice,
+                                            @RequestParam(value = "search", required = false) String search) {
+        return productService.getProducts(limit, offset, type, category, brand, minPrice, maxPrice, search);
     }
 
     @GetMapping("/product/{id}")

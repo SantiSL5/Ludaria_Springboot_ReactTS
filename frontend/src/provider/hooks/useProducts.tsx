@@ -25,11 +25,12 @@ export function useProducts() {
         brand: string | null; 
         minPrice: number | null; 
         maxPrice: number | null; 
+        search: number | null;
     }) => {
-        const { type, category, brand, minPrice, maxPrice} = filters;
+        const { type, category, brand, minPrice, maxPrice, search} = filters;
         console.log(limit,offset,filters);
     
-        consume(queryConsumer.apiProduct, productQueries.getAllProducts, { limit, offset, type, category, brand, minPrice, maxPrice}).then((res: any) => {
+        consume(queryConsumer.apiProduct, productQueries.getAllProducts, { limit, offset, type, category, brand, minPrice, maxPrice, search}).then((res: any) => {
             console.log(res);
             setProducts(res.data.products);
             setPages(res.data.pages);

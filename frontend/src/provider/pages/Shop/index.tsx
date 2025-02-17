@@ -23,6 +23,7 @@ const ShopPage = () => {
         brand: null,
         minPrice: null,
         maxPrice: null,
+        search: null,
     });
 
     useEffect(() => {

@@ -39,13 +39,14 @@ public class ProductService {
 
     private static final Logger logger = LoggerFactory.getLogger(ProductService.class);
 
-    public ResponseEntity<?> getProducts(String limit, String offset, String type, String category, String brand, String minPrice, String maxPrice) {
+    public ResponseEntity<?> getProducts(String limit, String offset, String type, String category, String brand, String minPrice, String maxPrice, String search) {
         try {
             ProductType typeFilter = type == null ? null : ProductType.valueOf(type);
             Long categoryFilter = category == null ? null : Long.parseLong(category);
             Long brandFilter = brand == null ? null : Long.parseLong(brand);
             BigDecimal minPriceFilter = minPrice == null ? null : parseBigDecimal(minPrice);
             BigDecimal maxPriceFilter = maxPrice == null ? null : parseBigDecimal(maxPrice);
+            String searchFilter = (search == null || search.isBlank()) ? null : "%" + search.toLowerCase() + "%";
 
             if (limit != null && offset != null) {
                 Pageable pageable = PageRequest.of(Integer.parseInt(offset), Integer.parseInt(limit));
@@ -59,6 +60,7 @@ public class ProductService {
                             brandFilter,
                             minPriceFilter,
                             maxPriceFilter,
+                            searchFilter,
                             user.getId()
                     );
                     List<Product> products = productPage.getContent().stream()
@@ -84,7 +86,8 @@ public class ProductService {
                             categoryFilter,
                             brandFilter,
                             minPriceFilter,
-                            maxPriceFilter
+                            maxPriceFilter,
+                            searchFilter
                     );
                     List<Product> products = productPage.getContent().stream()
                             .map(result -> {
@@ -107,7 +110,8 @@ public class ProductService {
                         categoryFilter,
                         brandFilter,
                         minPriceFilter,
-                        maxPriceFilter
+                        maxPriceFilter,
+                        searchFilter
                 );
                 List<Product> products = rawProducts.stream()
                         .map(result -> {
