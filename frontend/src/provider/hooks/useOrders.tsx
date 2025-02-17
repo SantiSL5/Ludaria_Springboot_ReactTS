@@ -10,7 +10,6 @@ export function useOrders() {
 
     const getOrders = (() => {
         consume(queryConsumer.apiOrder, orderQueries.getOrders).then((res: any) => {
-            console.log(res);
             setOrders(res);
         }).catch((res: any) => {
             if (res.response.data != null) {

@@ -20,6 +20,7 @@ import DetailsPage from '../pages/Details';
 import { AuthGuard } from './guards/AuthGuard';
 import AdminGuard from './guards/AdminGuard';
 import Cart from '../pages/Cart';
+import Profile from '../pages/Profile';
 
 
 const Router = () => {
@@ -46,7 +47,7 @@ const Router = () => {
                     </Route>
                     <Route element={<AuthGuard />}>
                         <Route path="/cart/" element={<Cart />}></Route>
-                        {/* <Route path="/profile/" element={<Profile />}></Route> */}
+                        <Route path="/profile/" element={<Profile />}></Route>
                     </Route>
                 </Routes>
             </Layout>

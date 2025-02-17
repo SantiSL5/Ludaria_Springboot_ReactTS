@@ -51,6 +51,16 @@ public class OrderService {
         }
     }
 
+    public List<Order> getAllOrders() {
+        try {
+            User user = userService.token_user();
+            return orderRepository.findAllByUserId(user.getId());
+        } catch (Exception e) {
+            logger.error("Error getting cart: {}", e.getMessage());
+            return null;
+        }
+    }
+
     public ResponseEntity<?> postOrder() {
         try {
             Cart cart = cartService.getCart();

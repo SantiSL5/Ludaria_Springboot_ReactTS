@@ -14,8 +14,8 @@ public class OrderController {
     OrderService orderService;
 
     @GetMapping("/client/order")
-    public ResponseEntity<?> getOrder() {
-        return new ResponseEntity<> (orderService.getOrder(), HttpStatus.OK);
+    public ResponseEntity<?> getOrders() {
+        return new ResponseEntity<> (orderService.getAllOrders(), HttpStatus.OK);
     }
 
     @PostMapping("/client/order")
