@@ -10,6 +10,7 @@ import userQueries from "./userQueries";
 import likeQueries from "./likeQueries";
 import commentQueries from "./commentQueries";
 import cartQueries from "./cartQueries";
+import orderQueries from "./orderQueries";
 
 export {
     queryConsumer,
@@ -24,4 +25,5 @@ export {
     likeQueries,
     commentQueries,
     cartQueries,
+    orderQueries,
 };

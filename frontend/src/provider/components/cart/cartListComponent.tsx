@@ -1,12 +1,14 @@
+import { Button } from "flowbite-react";
 import { useUsers } from "../../hooks/useUsers";
 
 interface CartListProps {
     cart: any;
     onUpdate: (cardLine: any,card: number) => void;
     onDelete: (id: number) => void;
+    onCheckout: () => void;
 }
 
-const cartListComponent : React.FC<CartListProps> = ({ cart, onUpdate, onDelete })=> {
+const cartListComponent : React.FC<CartListProps> = ({ cart, onUpdate, onDelete, onCheckout })=> {
     const { user } = useUsers();
     console.log(cart.cartLines)
 
@@ -22,12 +24,16 @@ const cartListComponent : React.FC<CartListProps> = ({ cart, onUpdate, onDelete 
         onDelete(id);
     }
 
+    const checkout = () => {
+        onCheckout();
+    }
 
 
     return (
     <div className="container mx-auto p-6 border rounded-lg shadow-md">
         <h2 className="text-2xl font-bold mb-4">Tu Carrito</h2>
-        {cart?.cartLines?.length > 0 ? (
+        
+        {cart?.cartLines?.length > 0 || cart == null ? (
             <>
                 <ul>
                     {cart.cartLines.map((item: any) => (
@@ -64,7 +70,8 @@ const cartListComponent : React.FC<CartListProps> = ({ cart, onUpdate, onDelete 
                                     </button>
                                     <input 
                                         type="number" 
-                                        value={item.cant} 
+                                        value={item.cant}
+                                        readOnly
                                         min="1" 
                                         className="w-12 text-center border rounded-md" 
                                         style={{ WebkitAppearance: 'none', MozAppearance: 'textfield' }}
@@ -92,9 +99,16 @@ const cartListComponent : React.FC<CartListProps> = ({ cart, onUpdate, onDelete 
                     <p>Total:</p>
                     <p>{cart.cartLines.reduce((total:any, item:any) => total + (item.unitaryPrice * item.cant), 0).toFixed(2)} €</p>
                 </div>
+                <div className="flex justify-end items-center py-4 font-semibold">
+                    <Button 
+                        color="blue" 
+                        onClick={checkout}>
+                            Comprar
+                    </Button>
+                </div>
             </>
         ) : (
-            <p className="text-gray-500">Tu carrito está vacío.</p>
+            <p className="text-black">Tu carrito está vacío.</p>
         )}
     </div>
     );

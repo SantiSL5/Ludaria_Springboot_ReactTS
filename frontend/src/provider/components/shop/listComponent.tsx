@@ -2,6 +2,8 @@ import { useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import Rating from '@mui/material/Rating';
 import { useUsers } from '../../hooks/useUsers';
+import InfoIcon from '@mui/icons-material/Info';
+
 
 interface ListProps {
     items: any[];
@@ -72,16 +74,20 @@ const ListComponent: React.FC<ListProps> = ({ items, onLike, onAddToCard }) => {
                             <p className="flex items-center"><Rating size="small" defaultValue={item.rating} precision={0.1} readOnly />{item.rating ? item.rating.toFixed(1) : "N/A"}</p>
                     </div>
                     {user ? (
-                        <div className="flex items-center justify-end mt-2 text-sm text-gray-500">
-                            <button 
+                        <div className="flex items-center justify-between mt-2 text-sm text-gray-500">
+                            {item.stock < 1 ? (
+                                <p className="text-red-600 flex items-center ml-auto mt-1"><InfoIcon className="items-center mr-1" />No stock</p>
+                            ) : (
+                                <button 
                                 onClick={(e) => {
                                     e.stopPropagation();
                                     handleAddToCart(item.id);
                                 }}
                                 className="bg-blue-500 text-white py-1 px-3 rounded-lg hover:bg-blue-600 ml-auto"
-                            >
-                                Añadir al carrito
-                            </button>
+                                >
+                                    Añadir al carrito
+                                </button>
+                            )}
                         </div>
                     ) : <></>}
                 </div>

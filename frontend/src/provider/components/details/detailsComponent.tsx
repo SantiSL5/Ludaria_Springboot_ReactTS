@@ -64,7 +64,7 @@ const DetailsComponent : React.FC<DetailsProps> = ({ product, onLike, onNewComme
             </div>
             <div className="md:w-1/2 md:pl-6">
                 <h2 className="text-5xl font-bold">{product.name}</h2>
-                <Rating className="mt-5" defaultValue={product.rating} precision={0.1} size="large" readOnly/>
+                <Rating className="mt-5" value={product.rating} precision={0.1} size="large" readOnly/>
                 <p className="text-xl font-semibold mt-4">{product.price} €</p>
                 <div className="flex items-center mt-3">
                         <p className="text-lg text-black mr-1">{product.likes || 0} </p>

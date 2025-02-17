@@ -4,7 +4,6 @@ import { queryConsumer, accessoryQueries, cartQueries } from "../../core/queries
 import { toast } from 'react-toastify'
 
 export function useCart() {
-    const [loading, setLoading]: any = useState(true);
     const [cart, setCart]: any = useState(undefined);
 
     const getCart = (() => {

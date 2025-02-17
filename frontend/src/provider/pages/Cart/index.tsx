@@ -3,9 +3,11 @@ import Spinner from "../../components/spinner/spinner.component";
 import { useCart } from "../../hooks/useCart";
 import CartListComponent from "../../components/cart/cartListComponent";
 import { toast } from "react-toastify";
+import { useOrders } from "../../hooks/useOrders";
 
 const Cart = () => {
     const { cart, getCart, updateCartLine, deleteCardLine} = useCart();
+    const { createOrder } = useOrders();
     useEffect(() => {
         getCart();
     }, []);
@@ -31,6 +33,7 @@ const Cart = () => {
             }
         }
     }
+
     const handleDelete = async (id:number) => {
         try {
             await deleteCardLine(id);
@@ -40,12 +43,17 @@ const Cart = () => {
             console.log(e);
         }
     }
+
+    const handleCheckout = () => {
+        createOrder()
+    }
+
+    console.log(cart)
     
 
     return (
         <div className="container flex justify-items-center mx-auto my-5 ">
-            {cart ? (<CartListComponent cart={cart} onUpdate={handleUpdate} onDelete={handleDelete} />) : <Spinner />}
-
+            {cart != null ? (<CartListComponent cart={cart} onUpdate={handleUpdate} onDelete={handleDelete} onCheckout={handleCheckout}/>) : <Spinner />}
         </div>
     );
 }

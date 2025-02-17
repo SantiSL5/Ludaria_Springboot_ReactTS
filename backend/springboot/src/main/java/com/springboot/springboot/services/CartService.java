@@ -29,7 +29,7 @@ public class CartService {
     @Autowired
     UserService userService;
 
-    private static final Logger logger = LoggerFactory.getLogger(BrandService.class);
+    private static final Logger logger = LoggerFactory.getLogger(CartService.class);
 
 
     // Cart
@@ -102,7 +102,7 @@ public class CartService {
                 return new ResponseEntity<>(cart, HttpStatus.OK);
             }
         } catch (Exception e) {
-            logger.error("Error getting cart: {}", e.getMessage());
+            logger.error("Error adding cart: {}", e.getMessage());
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
     }
@@ -116,7 +116,7 @@ public class CartService {
             cartLine.setUpdated_at(new Timestamp(System.currentTimeMillis()));
             cartLineRepository.save(cartLine);
         } catch (Exception e) {
-            logger.error("Error deleting CartLine: {}", e.getMessage());
+            logger.error("Error updating CartLine: {}", e.getMessage());
         }
     }
 

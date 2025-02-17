@@ -9,6 +9,7 @@ import userConsumer from "./userConsumer";
 import likeConsumer from "./likeConsumer";
 import commentConsumer from "./commentConsumer";
 import cartConsumer from "./cartConsumer";
+import orderConsumer from "./orderConsumer";
 
 const consumers: any = {
     ApiJwt: { ...jwtConsumer },
@@ -22,6 +23,7 @@ const consumers: any = {
     ApiLike: {...likeConsumer },
     ApiComment: {...commentConsumer },
     ApiCart: {...cartConsumer},
+    ApiOrder: {...orderConsumer},
 }
 
 export default consumers;

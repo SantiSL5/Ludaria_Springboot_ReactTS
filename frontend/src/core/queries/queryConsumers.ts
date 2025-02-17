@@ -10,6 +10,7 @@ const queryConsumer: any = {
     apiLike: "ApiLike",
     apiComment: "ApiComment",
     apiCart: "ApiCart",
+    apiOrder: "ApiOrder",
 }
 
 export default queryConsumer;
